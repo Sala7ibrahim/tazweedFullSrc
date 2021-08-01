@@ -1,0 +1,112 @@
+<app-header></app-header>
+<form *ngIf="showFormSubmit" class="small-form2 small-form form-after-bg" [(formGroup)]="registerForm" (ngSubmit)="register()">
+  <h4 class="we600 form-title">التسجيل</h4>
+  <!-- <h1>{{registerForm.value | json}}</h1> -->
+  <div class="form-group">
+    <input type="text" name="firstName" class="form-control" formControlName="firstName" placeholder="الاسم الاول" />
+    <span *ngIf="!registerForm.get('firstName').valid && registerForm.get('firstName').touched">ادخل الاسم الاول</span>
+  </div>
+  <div class="form-group">
+    <input type="text" name="lastName" class="form-control" formControlName="lastName" placeholder="الاسم الاخير" />
+    <span *ngIf="!registerForm.get('lastName').valid && registerForm.get('lastName').touched">ادخل الاسم الاخير</span>
+  </div>
+  <div class="form-group">
+    <input type="email" email name="email" class="form-control" formControlName="email" placeholder="البريد الالكترونى">
+    <span class="help-block" *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">ادخل
+      البريد الالكترونى</span>
+  </div>
+  <div class="form-group"> 
+    <input type="text" name="userName" class="form-control" formControlName="userName" placeholder="اسم المستخدم">
+    <span class="help-block" *ngIf="!registerForm.get('userName').valid && registerForm.get('userName').touched">ادخل اسم المستخدم</span>
+  </div>
+  <div class="form-group"> 
+    <input type="password" name="password" class="form-control" formControlName="password" placeholder="الرقم السرى">
+    <span class="help-block" *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">ادخل
+      الرقم
+      السرى</span>
+  </div>
+ 
+  <!-- <div class="form-group">
+    <input type="password" name="REpassword" class="form-control" formControlName="REpassword"
+      placeholder="اعادة كتابة الرقم السرى">
+    <span class="help-block" *ngIf="!registerForm.get('REpassword').valid && registerForm.get('REpassword').touched">اعد
+      كتابة الرقم
+      السرى</span>
+  </div>
+  <span class="help-block"
+    *ngIf="registerForm.get('REpassword').touched && registerForm.get('password').value != registerForm.get('REpassword').value">password
+    dosen't match</span>
+  <div class="form-group">
+    <input type="text" name="status" class="form-control" formControlName="status" placeholder="الحالة">
+    <span class="help-block" *ngIf="!registerForm.get('status').valid && registerForm.get('status').touched">ادخل
+      الحالة</span>
+  </div> -->
+
+
+  <!-- <div class="form-group">
+    <input type="text" name="mobileNumber" class="form-control" formControlName="mobileNumber" placeholder="رقم الجوال">
+    <span class="help-block"
+      *ngIf="!registerForm.get('mobileNumber').valid && registerForm.get('mobileNumber').touched">ادخل رقم الجوال
+    </span>
+  </div>
+  <div class="form-group">
+    <input type="text" name="country" class="form-control" formControlName="country" placeholder="البلد">
+    <span class="help-block" *ngIf="!registerForm.get('country').valid && registerForm.get('country').touched">ادخل
+      البلد</span>
+  </div>
+
+  <div class="form-group">
+    <select formControlName="fieldsOfInterest" class="form-control">
+      <option disabled selected>المجالات المفضلة</option>
+      <option value="author">الرواية القصيرة</option>
+      <option value="author">الشعر</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <select formControlName="customerType" class="form-control">
+      <option disabled selected>نوع المستخدم</option>
+      <option value="client">عميل</option>
+      <option value="client">شاعر</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="text" name="urlPicture" class="form-control" formControlName="urlPicture"
+      placeholder="رابط الصورة الشخصية">
+  </div> -->
+  <!-- <div formArrayName="hoppies">
+    <div class="form-group" *ngFor="let hoppy of registerForm.get('hoppies')['controls']; let i = index">
+      <input type="text" class="form-control" [formControlName]="i" />
+    </div>
+    <button type="button" (click)="addHopy()">Add hoppy</button>
+  </div> -->
+
+  <!-- <div class="form-group attach-container">
+
+    <input type="file" name="attach" class="form-control attach-input" (change)="onChange($event)"
+      placeholder="رابط الصورة الشخصية">
+    <input type="text" hidden name="attach" class="form-control" formControlName="attach">
+
+  </div> -->
+  <div class="form-group">
+    <div class="form-check">
+      <input type="checkbox" name="termsAndConditions"class="form-check-input" [value]="true" formControlName="termsAndConditions">
+      <label class="form-check-label" for="exampleCheck1">أوافق على الشروط</label>
+    </div>
+  </div>
+  <div class="clearfix text-center">
+    <button [disabled]="!registerForm.valid" class="btn btn-success" type="submit">انشاء حساب جديد</button>
+  </div>
+</form>
+<div class="text-center showFailMessage" *ngIf="showFailMessage">
+
+  <p>{{errorDetails}}</p>
+</div>
+<div class="text-center showSuccessMessage"  *ngIf="showSuccessMessage">
+
+  <p>تم التسجيل بنجاح برجاء فتح بريدك الالكترونى لتأكيد التسجيل</p> 
+</div>
+<div>
+  <button routerLink="login" routerLinkActive="active" class="btn btn-success" type="button">لديك حساب بالفعل</button>
+
+  
+</div>

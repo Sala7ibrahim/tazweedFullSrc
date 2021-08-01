@@ -1,0 +1,146 @@
+<header class="fixed-header hidden-Tablet">
+  <div class="container text-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex">
+
+      <div class="float-right d-lg-none d-md-none d-sm-none">
+        <a class="navbar-brand" routerLink=""><img src="../../../assets/images/logo.svg" /></a>
+      </div>
+      <div class="d-none d-sm-block">
+        <a class="navbar-brand" routerLink=""><img src="../../../assets/images/logo.svg" /></a>
+      </div>
+<!-- 
+      <div class="float-right d-none d-sm-block">
+        <nav class="nav">
+          <li><a class="nav-link" routerLink="/clientRegister">+ أضف مشروع</a></li>
+          <li><a class="nav-link active" routerLink="/clientRegister">نفذ مشروع</a></li>
+
+
+        </nav>
+      </div> -->
+      
+      <button class="navbar-toggler float-left d-md-none" type="button" (click)="isCollapsed = !isCollapsed;"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+      </button>
+      <!-- ACCORDION PART START -->
+      <div id="accordion-part" class="d-lg-none d-md-none d-sm-none">
+
+        <div [ngbCollapse]="isCollapsed">
+          <ul class="menu">
+            <li class="list active">
+              <button routerLink="/clientRegister" type="submit" class="btn btn-success">سجل كعميل</button>
+            </li>
+            <!-- <li class="list">
+              <button routerLink="/partnerRegister" type="submit" class="btn btn-success">سجل ككاتب</button>
+            </li> -->
+            <li class="list">
+              <button type="submit" routerLink="/login" class="btn btn-success normal-btn">تسجيل الدخول</button>
+            </li>
+            <!-- <li class="list"><button class="btn btn-success" routerLink="/clientRegister">+ أضف مشروع</button></li>
+            <li class="list"><button class="btn btn-success" routerLink="/login">نفذ مشروع</button></li> -->
+            <li class="list">
+              <button type="submit" routerLink="/faq" class="btn btn-success normal-btn">أسئلة شائعة</button>
+            </li>
+
+
+          </ul>
+        </div>
+
+
+
+
+
+      </div>
+      <!-- ACCORDION PART END -->
+
+      <div class=" navbar-collapse  d-none d-sm-block" id="navbarText">
+        <ul class="navbar-nav mr-auto top-register-group">
+          <li class="nav-item active">
+            <button routerLink="/clientRegister" type="submit" class="btn btn-success">سجل كعميل</button>
+          </li>
+          <!-- <li class="nav-item">
+            <button routerLink="/partnerRegister" type="submit" class="btn btn-success">سجل ككاتب</button>
+          </li> -->
+          <li class="nav-item">
+            <button type="submit" routerLink="/login" class="btn btn-success normal-btn">تسجيل الدخول</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
+
+
+
+
+<header class="fixed-header visible-Tablet">
+  <div class="container text-center">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light d-flex">
+
+      <div class="float-right d-lg-none d-md-none d-sm-none">
+        <a class="navbar-brand" routerLink=""><img src="../../../assets/images/logo.svg" /></a>
+      </div>
+      <div class="d-none d-sm-block">
+        <a class="navbar-brand" routerLink=""><img src="../../../assets/images/logo.svg" /></a>
+      </div>
+
+      <div class="float-right d-none d-sm-block">
+        <nav class="nav">
+          <li><a class="nav-link" routerLink="/clientRegister">+ أضف مشروع</a></li>
+          <li><a class="nav-link active" routerLink="/clientRegister">نفذ مشروع</a></li>
+
+
+        </nav>
+      </div>
+      
+      <button class="navbar-toggler float-left d-md-none" type="button" (click)="isCollapsed = !isCollapsed;"
+        [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+      </button>
+      <!-- ACCORDION PART START -->
+      <div id="accordion-part" class="d-lg-none d-md-none d-sm-none">
+
+        <div [ngbCollapse]="isCollapsed">
+          <ul class="menu">
+            <li class="list active">
+              <button routerLink="/clientRegister" type="submit" class="btn btn-success">سجل كعميل</button>
+            </li>
+            <!-- <li class="list">
+              <button routerLink="/partnerRegister" type="submit" class="btn btn-success">سجل ككاتب</button>
+            </li> -->
+            <li class="list">
+              <button type="submit" routerLink="/login" class="btn btn-success normal-btn">تسجيل الدخول</button>
+            </li>
+            <!-- <li class="list"><button class="btn btn-success" routerLink="/clientRegister">+ أضف مشروع</button></li>
+            <li class="list"><button class="btn btn-success" routerLink="/login">نفذ مشروع</button></li> -->
+            <li class="list">
+              <button type="submit" routerLink="/faq" class="btn btn-success normal-btn">أسئلة شائعة</button>
+            </li>
+
+
+          </ul>
+        </div>
+
+
+
+
+
+      </div>
+      <!-- ACCORDION PART END -->
+
+      <div class=" navbar-collapse  d-none d-sm-block" id="navbarText">
+        <ul class="navbar-nav mr-auto top-register-group">
+          <li class="nav-item active">
+            <button routerLink="/clientRegister" type="submit" class="btn btn-success">سجل كعميل</button>
+          </li>
+          <!-- <li class="nav-item">
+            <button routerLink="/partnerRegister" type="submit" class="btn btn-success">سجل ككاتب</button>
+          </li> -->
+          <li class="nav-item">
+            <button type="submit" routerLink="/login" class="btn btn-success normal-btn">تسجيل الدخول</button>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>
