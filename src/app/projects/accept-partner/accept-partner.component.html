@@ -36,7 +36,26 @@
 
   <div class="project-item mt30">
     <div class="card-body">
-      <h6 class="mobile-link">{{projectTitle}}</h6>
+      <div class="d-flex  justify-content-between">
+        <h6 class="mobile-link">{{projectTitle}}</h6>
+        <!-- *ngIf="selectedProject?.ableToCancel==true && loggedUserType =='client'"  -->
+        <div *ngIf="selectedProject?.ableToCancel==true && loggedUserType =='client'" class="text-right"
+          style="margin-bottom: 10px">
+          <button (click)="openCancelJobDLG()" class="btn btn-success admin-danger-btn  auto-width-btn admin-btn">
+            <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+            الغاء المشروع
+          </button>
+        </div>
+
+        <div *ngIf="selectedProject?.status!='completed' && loggedUserType =='partner'" class="text-right"
+          style="margin-bottom: 10px">
+          <button (click)="openWithDrawDialog()" class="btn btn-success admin-danger-btn  auto-width-btn admin-btn">
+            <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+            الانسحاب من المشروع
+          </button>
+        </div>
+      </div>
+
       <div *ngIf="selectedProject?.status=='active' || selectedProject?.status=='prePayment' " class="custom-stepper">
 
         <div *ngIf="selectedProject?.status=='prePayment'" class="custom-stepper signupintro p10 mobile-stepper">
@@ -1082,10 +1101,15 @@
           والدفع
         </button>
         <button *ngIf="selectedProject?.numberOfRejection==0" (click)="rejectProject()" type="button"
-          class="btn btn-success auto-width-btn nobg-btn">طلب تعديلات
+          class="btn btn-success auto-width-btn nobg-btn">
+          <fa-icon class="ml5" [icon]="faWrench"></fa-icon>
+          طلب تعديلات
         </button>
+        <!-- *ngIf="selectedProject?.numberOfRejection==1 ||selectedProject?.numberOfRejection==2 " -->
         <button *ngIf="selectedProject?.numberOfRejection==1 ||selectedProject?.numberOfRejection==2 "
-          (click)="rejectProject()" type="button" class="btn btn-success auto-width-btn nobg-btn">رفض نهائي
+          (click)="rejectProject()" type="button" class="btn btn-success auto-width-btn nobg-btn danger">
+          <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+          رفض نهائي
         </button>
       </div>
 
@@ -1114,7 +1138,7 @@
       <div class="stars-block">
 
 
-        <ngb-rating readonly="true"  max="5"  [(rate)]="singlerating.rate">
+        <ngb-rating readonly="true" max="5" [(rate)]="singlerating.rate">
           <ng-template let-fill="fill" let-index="index">
             <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
           </ng-template>
@@ -1140,7 +1164,7 @@
       <div class="stars-block">
 
 
-        <ngb-rating readonly="true"  max="5"  [(rate)]="singlerating.rate">
+        <ngb-rating readonly="true" max="5" [(rate)]="singlerating.rate">
           <ng-template let-fill="fill" let-index="index">
             <span class="star" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
           </ng-template>
@@ -1180,19 +1204,7 @@
     (click)="Export2Doc('exportContent', selectedProject.projectTitle)">
     <fa-icon class="ml5" [icon]="faFileDownload"></fa-icon>تحميل النص
   </button>
-  <div *ngIf="selectedProject?.ableToCancel==true && loggedUserType =='client'" class="text-right"
-    style="margin: 20px 0;">
-    <button (click)="openCancelJobDLG()" class="btn btn-success auto-width-btn export-btn">
-      الغاء المشروع
-    </button>
-  </div>
 
-  <div *ngIf="selectedProject?.status!='completed' && loggedUserType =='partner'" class="text-right"
-    style="margin: 20px 0;">
-    <button (click)="openWithDrawDialog()" class="btn btn-success auto-width-btn export-btn">
-      الغاء العمل على المشروع
-    </button>
-  </div>
 
   <!-- comments section -->
   <!-- selectedProject.status=='reviewing' && -->
@@ -1227,27 +1239,29 @@
           </div>
         </form>
       </div>
+      <div *ngIf="commentForJob?.length>0">
+        <div class="previous-comments"
+          *ngIf="selectedProject?.partnerId!='null' && selectedProject?.status=='inprogress' || selectedProject?.status=='completed' || selectedProject?.status=='reviewing' || selectedProject?.status=='rejected' && showMessages==true">
+          <h6>الرسائل</h6>
+          <!-- <div>{{commentForJob|json}}</div> -->
 
-      <div class="previous-comments"
-        *ngIf="selectedProject?.partnerId!='null' && selectedProject?.status=='inprogress' || selectedProject?.status=='completed' || selectedProject?.status=='reviewing' || selectedProject?.status=='rejected' && showMessages==true">
-        <h6>الرسائل</h6>
-        <!-- <div>{{commentForJob|json}}</div> -->
 
+          <div class="clearfix" *ngFor="let comment of commentForJob">
+            <div class="project-small-image float-right">
+              <img src="../../../assets/images/profile/goldAvatar.svg" />
+            </div>
+            <div class="owner-data float-right">
+              <h5>{{comment?.firstName}} {{comment?.lastName}}</h5>
+              <span class="gray reg-font font-13">{{comment?.createAt |date : "dd.MM.y h:mm a" }}</span>
+              <p class="reg-font">{{comment?.content}}</p>
 
-        <div class="clearfix" *ngFor="let comment of commentForJob">
-          <div class="project-small-image float-right">
-            <img src="../../../assets/images/profile/goldAvatar.svg" />
+            </div>
           </div>
-          <div class="owner-data float-right">
-            <h5>{{comment?.firstName}} {{comment?.lastName}}</h5>
-            <span class="gray reg-font font-13">{{comment?.createAt |date : "dd.MM.y h:mm a" }}</span>
-            <p class="reg-font">{{comment?.content}}</p>
 
-          </div>
+
         </div>
-
-
       </div>
+
 
     </div>
   </div>
@@ -1453,7 +1467,7 @@
           كيف كانت الخدمة؟
         </h5>
         <p class="gray-custom reg-font">
-          قيم الخدمة الأن لتحسين مستوانا وجودة الخدمة </p>
+          تقييمك يساعدنا في تحسين تزويد </p>
         <button (click)="closeRatingDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -1481,13 +1495,12 @@
           </div>
 
 
-          <textarea formControlName="comment" class="form-control m20"
-            placeholder="اكتب تعليقك عن مستوى الخدمة "></textarea>
+          <textarea formControlName="comment" class="form-control m20" placeholder="ضع تعليقك من فضلك "></textarea>
           <div>
             <span class="error-help"
               *ngIf="!addRatingForClientForm.get('comment').valid && addRatingForClientForm.get('comment').touched">
               <fa-icon [icon]="faExclamationCircle"></fa-icon>
-              ادخل عبارة التقييم
+              نسيت التعليق!
             </span>
           </div>
           <div><button [disabled]="!addRatingForClientForm.valid" type="submit"
@@ -1511,10 +1524,11 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">
-          كيف كانت تجربتك مع العميل؟        </h5>
+          كيف كانت تجربتك مع العميل؟ </h5>
         <p class="gray-custom reg-font">
-          قيم الخدمة الأن لتحسين مستوانا وجودة الخدمة </p>
-        <button (click)="closePartnerRatingDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          تقييمك يساعدنا في تحسين تزويد </p>
+        <button (click)="closePartnerRatingDialog()" type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -1541,13 +1555,12 @@
           </div>
 
 
-          <textarea formControlName="comment" class="form-control m20"
-            placeholder="اكتب تعليقك عن مستوى الخدمة "></textarea>
+          <textarea formControlName="comment" class="form-control m20" placeholder="ضع تعليقك من فضلك "></textarea>
           <div>
             <span class="error-help"
               *ngIf="!addRatingForPartnerForm.get('comment').valid && addRatingForPartnerForm.get('comment').touched">
               <fa-icon [icon]="faExclamationCircle"></fa-icon>
-              ادخل عبارة التقييم
+              نسيت التعليق!
             </span>
           </div>
           <div><button [disabled]="!addRatingForPartnerForm.valid" type="submit"

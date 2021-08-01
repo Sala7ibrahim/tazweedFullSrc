@@ -437,9 +437,20 @@
               </div>
               <div class="ratingContainer">
                 <div class="rate" *ngFor="let rate of profileRating">
-                  <h6>{{rate.firstName}} {{rate.lastName}}</h6>
-                  <ngb-rating max="5" [rate]="rate.rate"></ngb-rating>
-                  <h6>{{rate.comment}}</h6>
+                  <div>
+                    <h6>{{rate.firstName}} {{rate.lastName}}</h6>
+
+                    <ngb-rating readonly="true"  max="5"  [(rate)]="rate.rate">
+                      <ng-template let-fill="fill" let-index="index">
+                        <span class="star profile-in" [class.filled]="fill === 100" [class.bad]="index < 3">&#9733;</span>
+                      </ng-template>
+                    </ngb-rating>
+            
+                    <h6>{{rate.comment}}</h6>
+                  </div>
+                  
+                  <!-- <ngb-rating max="5" [rate]="rate.rate"></ngb-rating> -->
+                  
 
                   <hr />
 

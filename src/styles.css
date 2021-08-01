@@ -17,7 +17,7 @@
 }
 
 body {
-  background: #FFFFFF;
+  background: #f7f7f7;
   direction: rtl;
   text-align: right;
   font-family: 'Dubai W23 Bold', sans-serif;
@@ -932,6 +932,12 @@ ngb-rating {
 .nobg-btn {
   color: #247d8f !important;
   border: 2px solid #247d8f !important;
+  background-color: transparent !important;
+}
+
+.danger.nobg-btn {
+  color: #dc3545  !important;
+  border: 2px solid #dc3545  !important;
   background-color: transparent !important;
 }
 
@@ -2112,7 +2118,7 @@ ul.menu .list a {
   position: fixed;
   width: 100%;
   height: 100%;
-  background: #00000014;
+  background: #00000040;
   bottom: top;
   z-index: 1;
   right: 0;
@@ -2550,7 +2556,12 @@ ul.menu .list a {
   opacity: 0.4;
 }
 .gray-custom{color: #707070;margin-bottom: 0;}
-.stars-block .d-inline-flex{display: block !important;text-align: center;}
+.stars-block .d-inline-flex{
+  display: block !important;
+  text-align: center;  
+    border-color: transparent !important;
+  outline: none !important;
+}
 .rate-result-container{min-height: 30px;}
 .m20{margin: 20px 0;}
 .rate-result{
@@ -2559,6 +2570,7 @@ ul.menu .list a {
   font-size: 18px;
   margin: 0;
 }
+.ql-toolbar.ql-snow + .ql-container.ql-snow{border: 0;}
 .btn-success.app-button.full-width-btn{width: 100% !important;}
 /* ngb-rating{
   font-size: 40px;
@@ -2575,6 +2587,9 @@ ngb-rating.ng-ng-valid {
 .star {
   font-size: 40px;
   color: #D2D2D2;
+}
+.star.profile-in.star {
+  font-size: 18px;
 }
 .filled {
   color: #247D8F;
@@ -2598,6 +2613,7 @@ ngb-rating.ng-ng-valid {
   height: 40px;
     margin: 10px 0;
 }
+.rating-dialog .btn-success.app-button.full-width-btn{height: 50px;}
 @media (min-width: 1030px) {
   .visible-Tablet {
     display: none;
@@ -3237,3 +3253,4 @@ ngb-rating.ng-ng-valid {
 .error:focus {
   border-color: red;
 }
+

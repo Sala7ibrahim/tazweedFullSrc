@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ManageProjectService } from 'src/app/services/manage-project.service';
 import { UserService } from 'src/app/services/user.service';
 import { UUIDService } from 'src/app/services/uuid.service';
-import { faEnvelope, faGrinStars, faTimes, faCheck, faExclamationTriangle, faHourglassHalf, faMoneyBillWave, faFileAlt, faChevronDown, faExclamationCircle, faChevronUp, faArrowLeft, faFileDownload, faAddressCard, faUserAlt, faMobileAlt, faFlag, faVenusMars, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope,faWrench, faGrinStars, faTimes, faCheck, faExclamationTriangle, faHourglassHalf, faMoneyBillWave, faFileAlt, faChevronDown, faExclamationCircle, faChevronUp, faArrowLeft, faFileDownload, faAddressCard, faUserAlt, faMobileAlt, faFlag, faVenusMars, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 import { project } from 'src/app/Model/project';
 
 @Component({
@@ -19,6 +19,7 @@ export class AcceptPartnerComponent implements OnInit {
   public isCollapsed = true;
   faEnvelope = faEnvelope;
   faChevronUp = faChevronUp;
+  faWrench = faWrench;
   faArrowLeft = faArrowLeft;
   cancelJobMessageP = false;
   faGrinStars = faGrinStars;
