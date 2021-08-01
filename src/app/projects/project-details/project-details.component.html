@@ -1,0 +1,189 @@
+<app-after-login-header></app-after-login-header>
+<!-- <h1>{{selectedProject|json}}</h1> -->
+ 
+<div class="container">
+    <div *ngIf="showApplySuccessMessage" class="modal2 custom-modal" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">التقديم على المشروع</h5>
+              <button (click)="closeDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>تم التقديم على المشروع انتظر موافقة العميل على طلبك</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+  <div class="card project-item mt30">
+    <div class="card-body">
+      <div class="clearfix">
+        <div class="float-right">
+          <img class="project-details-img" [src]="clientImage" />
+        </div>
+        <div class="owner-data float-right">
+          <h5>{{selectedProject?.firstName}} {{selectedProject?.lastName}}</h5>
+          <span class="gray reg-font font-13">{{selectedProject?.createdAt |date : "dd.MM.y h:mm a" }}</span>
+
+        </div>
+      </div>
+      <h5 class="project-title">{{selectedProject?.projectTitle}}</h5>
+      <h6>{{selectedProject?.briefProject}}</h6>
+      <div class="d-flex  greenlight">
+        <div class="d-flex ml100">
+          <div class="project-icon ">
+            <fa-icon [icon]="faFileAlt"></fa-icon>
+          </div>
+
+
+          <div *ngIf="selectedProject?.size==1" class="project-prop">
+            <h6>مشروع قصير</h6>
+            <span>
+              (600 كلمة)
+            </span>
+          </div>
+          <div *ngIf="selectedProject?.size==2" class="project-prop">
+            <h6>مشروع متوسط</h6>
+            <span>
+              (1200 كلمة)
+            </span>
+          </div>
+          <div *ngIf="selectedProject?.size==3" class="project-prop">
+            <h6>مشروع طويل</h6>
+            <span>
+              (2400 كلمة)
+            </span>
+          </div>
+          <div *ngIf="selectedProject?.size==null" class="project-prop">
+            <h6>مشروع غير محدد</h6>
+            <span>
+              (؟؟؟ كلمة)
+            </span>
+          </div>
+
+
+        </div>
+
+
+        <div class="d-flex ml100">
+          <div class="project-icon">
+            <fa-icon [icon]="faHourglassHalf"></fa-icon>
+          </div>
+          <div *ngIf="selectedProject?.timePerDay==1" class="project-prop">
+            <h6>مدة التنفيذ 24 ساعة</h6>
+            <span>
+              (يوم واحد)
+            </span>
+          </div>
+          <div *ngIf="selectedProject?.timePerDay==2" class="project-prop">
+            <h6>مدة التنفيذ 48 ساعة</h6>
+            <span>
+              (يومين)
+            </span>
+          </div>
+          <div *ngIf="selectedProject?.timePerDay==3" class="project-prop">
+            <h6>مدة التنفيذ 72 ساعة</h6>
+            <span>
+              (ثلاثة أيام)
+            </span>
+          </div>
+          <div *ngIf="selectedProject?.timePerDay==null" class="project-prop">
+            <h6>مدة التنفيذ غير محددة</h6>
+            <span>
+              (؟؟؟؟)
+            </span>
+          </div>
+
+        </div>
+
+        <div class="d-flex ml100">
+          <div class="project-icon">
+            <fa-icon [icon]="faMoneyBillWave"></fa-icon>
+          </div>
+          <div class="LI45">
+            {{selectedProject?.totalCost}} ريال
+          </div>
+        </div>
+      </div>
+
+      <div class="row-item">
+        <h6>الكلمات المفتاحية</h6>
+        <ul class="tags d-flex">
+          <li class="tag-item" *ngFor="let tag of tags">{{tag}}</li> 
+        </ul>
+      </div>
+      <hr />
+      <div class="row-item">
+        <h6>أفكار تريد التركيز عليها</h6>
+        <p>{{selectedProject?.projectIdea}}</p>
+      </div>
+      <hr />
+
+      
+      <div class="row-item">
+        <h6>المصادر المقترحة</h6>
+        <p class="reg-font">{{selectedProject?.resource}}</p>
+      </div>
+      <hr />
+      <div class="row-item">
+        <h6>الروابط</h6>
+        <ul class="helpfulLinks ">
+          <li class="helpfulLinkItem reg-font" *ngFor="let helpfulLink of helpfulLinks">{{helpfulLink}}</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="card project-item">
+    <div class="card-body">
+        <h5  class="project-title">المشروع مناسب لك؟</h5>
+        <p class="reg-font">قدم طلب التنفيذ وانتظر موافقة العميل</p>
+        <button (click)="applyForJob()" class="btn btn-success auto-width-btn" type="button">قدم على المشروع</button>
+    </div>
+  </div>
+
+  <div *ngIf="showApplyLimitMessage" class="modal2 custom-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">التقديم على المشروع</h5>
+          <button (click)="closeLimitDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>وصلت للحد الاقصى للتقديم على المشاريع</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="limitIndividual" class="modal2 custom-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">التقديم على المشروع</h5>
+          <button (click)="closeLimitDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>تم التقديم من قبل على هذا المشروع</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  
+</div>
+<app-footer-inner></app-footer-inner> 
+<div *ngIf="showLoader" class="loader loaderMaster">
+  <div class="cssload-container">
+    <div class="cssload-speeding-wheel"></div>
+  </div>
+</div>

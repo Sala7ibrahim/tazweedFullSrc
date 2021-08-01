@@ -1,0 +1,126 @@
+<div *ngFor="let project of allArcheivedProjects ">
+
+    <div>
+
+      <div class="card project-item">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <h6><a class="project-title" style="cursor: pointer;"
+                (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+ 
+
+          </div>
+
+
+
+          <div class="custom-stepper">
+            <div class="rpp-stepper">
+
+              <a class="stepper-link">
+                <div class="rpp-stepper-item rpp-stepper-item-pending">
+                  <span class="rpp-stepper-item-content">1</span>
+                  <div class="step-title-custom">انشاء الطلب</div>
+                </div>
+              </a>
+
+              <div class="rpp-stepper-divider"></div>
+              <a class="stepper-link">
+                <div class="rpp-stepper-item rpp-stepper-item-pending">
+                  <span class="rpp-stepper-item-content">2</span>
+                  <div class="step-title-custom">قبول الكاتب</div>
+                </div>
+              </a>
+              <div class="rpp-stepper-divider"></div>
+
+              <a class="stepper-link">
+                <div class="rpp-stepper-item rpp-stepper-item-pending">
+                  <span class="rpp-stepper-item-content">3</span>
+                  <div class="step-title-custom">قيد التنفيذ</div>
+                </div>
+              </a>
+              <div class="rpp-stepper-divider"></div>
+              <a class="stepper-link">
+                <div class="rpp-stepper-item rpp-stepper-item-pending">
+                  <span class="rpp-stepper-item-content">4</span>
+                  <div class="step-title-custom">المراجعة</div>
+                </div>
+              </a>
+
+
+              <div class="rpp-stepper-divider"></div>
+              <a class="stepper-link">
+                <div class="rpp-stepper-item rpp-stepper-item-pending">
+                  <span class="rpp-stepper-item-content">5</span>
+                  <div class="step-title-custom">انتهاء المشروع</div>
+                </div>
+              </a>
+
+            </div>
+          </div>
+
+
+          <div>
+            <button *ngIf="takeActionsPrivilage" (click)="showDeleteprojectDialog(project)" type="button"
+              class="btn btn-success float-left repay-btn auto-width-btn">حذف</button>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div *ngIf="deleteprojectMode" class="modal2 custom-modal custom-modal22" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            <fa-icon [icon]="faTrashAlt" style="padding-left: 5px;"></fa-icon>
+            حذف مشروع 
+          </h5>
+          <button (click)="closeDeleteprojectDialog()" type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p15 text-right">
+  <p class="mt0 reg-font">
+    هل انت متأكد أنك تريد حذف المشروع؟ هذا سوف يحذف المشروع نهائياً
+  </p>
+          <!-- <h1>{{projectToDelete | json}}</h1> -->
+          <div class="d-flex">
+            <button (click)="deleteProject()" type="button" style="margin-left: 10px;"
+            class="btn btn-success float-right auto-width-btn admin-btn danger-btn">
+            حذف المشروع
+          </button>
+            <button (click)="closeDeleteprojectDialog()" style="margin-left: 10px;" type="button"
+              class="btn btn-success float-right auto-width-btn admin-btn nobg-btn gray-btn">
+              <!-- <fa-icon class="ml5" [icon]="faCheck"></fa-icon> -->
+              إلغاء الأمر
+  
+            </button>
+       
+  
+          </div>
+          <p *ngIf="deleteSuccess">تم حذف المشروع </p>
+          <p *ngIf="deleteFail">حدث خطأ اثناء حذف المشروع </p>
+  
+        </div>
+      </div>
+    </div>
+  </div>
+   
+
+  
+  
+  <div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+  

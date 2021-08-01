@@ -1,0 +1,798 @@
+
+<app-after-login-header></app-after-login-header>
+<div class="container" *ngIf="!projectDataNotExist">
+
+
+    <!-- <h1>selected project {{selectedProject|json}}</h1>    -->
+    <div id="exportContent" style="display: none;">
+      <!-- Your content to export here -->
+      <div style="text-align: center;">
+        <!-- <h1 style="color:#247D8F;text-align: center">{{selectedProject.projectTitle}}</h1> -->
+      </div>
+      <!-- <h3>{{selectedProject.document}}</h3> -->
+      {{projectDocument}}
+    </div>
+  
+    <div *ngIf="loggedUserType=='admin'" style="margin:15px">
+      <h6 *ngIf="loggedUserType=='admin'">
+     اسم العميل : 
+     <a style="cursor: pointer;" (click)="previewProfileData(selectedProject.clientId)">{{selectedProject?.firstName}} {{selectedProject?.lastName}}</a>
+   </h6>
+   <h6 *ngIf="loggedUserType=='admin'">
+     اسم الكاتب : 
+     <a style="cursor: pointer;" (click)="previewProfileData(selectedProject.partnerId)">{{partnerName}}</a>
+   </h6>
+   </div> 
+    <!-- <div *ngIf="loggedUserType=='admin'" style="margin:15px">
+       <h6 *ngIf="loggedUserType=='admin'">
+      اسم العميل : 
+      <a style="cursor: pointer;" (click)="showUserDataDialog(selectedProject.clientId)">{{selectedProject?.firstName}} {{selectedProject?.lastName}}</a>
+    </h6>
+    <h6 *ngIf="loggedUserType=='admin'">
+      اسم الكاتب : 
+      <a style="cursor: pointer;" (click)="showUserDataDialog(selectedProject.partnerId)">{{partnerName}}</a>
+    </h6>
+    </div> -->
+   
+    <div class="project-item mt30">
+      <div class="card-body">
+        <h6 class="mobile-link">{{projectTitle}}</h6>
+        <div *ngIf="selectedProject?.status=='active' || selectedProject?.status=='prePayment' " class="custom-stepper">
+  
+          <div *ngIf="selectedProject?.status=='prePayment'" class="custom-stepper signupintro p10 mobile-stepper">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">1</span>
+                <div class="step-title">معلقة</div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div *ngIf="selectedProject?.status=='active'" class="custom-stepper signupintro p10 mobile-stepper">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">2</span>
+                <div class="step-title"> نشطة </div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div class="rpp-stepper lastStepper desktop-stepper">
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">1</span>
+                <div class="step-title-custom">انشاء الطلب</div>
+              </div>
+            </a>
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link" (click)="logStepValue('active')">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">2</span>
+                <div class="step-title-custom">قبول الكاتب</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">3</span>
+                <div class="step-title-custom">قيد التنفيذ</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">4</span>
+                <div class="step-title-custom">المراجعة</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">5</span>
+                <div class="step-title-custom">انتهاء المشروع</div>
+              </div>
+            </a>
+  
+          </div>
+          <div class="openDetails" *ngIf="isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              اعرض تفاصيل المشروع
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+  
+          </div>
+          <div class="openDetails" *ngIf="!isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              إخفاء تفاصيل المشروع
+              <fa-icon [icon]="faChevronUp"></fa-icon>
+            </button>
+  
+          </div>
+        </div>
+  
+  
+  
+        <div *ngIf="selectedProject?.status=='pending'" class="custom-stepper">
+          <div *ngIf="loggedUserType=='client'" class="custom-stepper signupintro p10 mobile-stepper">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">3</span>
+                <div class="step-title"> عروض الكتاب </div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div *ngIf="loggedUserType=='partner'" class="custom-stepper signupintro p10 mobile-stepper">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">3</span>
+                <div class="step-title"> موافقة العميل </div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div class="rpp-stepper lastStepper desktop-stepper">
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">1</span>
+                <div class="step-title-custom">انشاء الطلب</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a *ngIf="loggedUserType =='partner'" class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">2</span>
+                <div class="step-title-custom">قبول الكاتب</div>
+              </div>
+            </a>
+            <a *ngIf="loggedUserType =='client'" class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">2</span>
+                <div style="cursor: pointer;" class="step-title-custom" (click)="logStepValue('pending')">قبول الكاتب
+                </div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">3</span>
+                <div class="step-title-custom">قيد التنفيذ</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">4</span>
+                <div class="step-title-custom">المراجعة</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">5</span>
+                <div class="step-title-custom">انتهاء المشروع</div>
+              </div>
+            </a>
+          </div>
+          <div class="openDetails" *ngIf="isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              اعرض تفاصيل المشروع
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+  
+          </div>
+          <div class="openDetails" *ngIf="!isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              إخفاء تفاصيل المشروع
+              <fa-icon [icon]="faChevronUp"></fa-icon>
+            </button>
+  
+          </div>
+        </div>
+  
+  
+        <div *ngIf="selectedProject?.status=='inprogress'" class="custom-stepper">
+          <div class="rpp-stepper desktop-stepper">
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">1</span>
+                <div class="step-title-custom">انشاء الطلب</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">2</span>
+                <div class="step-title-custom">قبول الكاتب</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">3</span>
+                <div class="step-title-custom">قيد التنفيذ</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">4</span>
+                <div class="step-title-custom">المراجعة</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">5</span>
+                <div class="step-title-custom">انتهاء المشروع</div>
+              </div>
+            </a>
+          </div>
+          <div class="custom-stepper signupintro mobile-stepper p10">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">4</span>
+                <div class="step-title"> قيد التنفيذ </div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div class="openDetails" *ngIf="isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              اعرض تفاصيل المشروع
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+  
+          </div>
+          <div class="openDetails" *ngIf="!isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              إخفاء تفاصيل المشروع
+              <fa-icon [icon]="faChevronUp"></fa-icon>
+            </button>
+  
+          </div>
+  
+          <div class="text-center" *ngIf="loggedUserType =='partner'">
+  
+            <!-- <div class="reg-font">
+              <button style="margin: 20px 0;" (click)="deliverProjectForClient()" type="button"
+                class="btn btn-success auto-width-btn">
+                تسليم المشروع
+              </button>
+  
+            </div> -->
+          </div>
+        </div>
+  
+  
+        <div *ngIf="selectedProject?.status=='rejected'" class="custom-stepper">
+          <div class="rpp-stepper desktop-stepper">
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">1</span>
+                <div class="step-title-custom">انشاء الطلب</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">2</span>
+                <div class="step-title-custom">قبول الكاتب</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">3</span>
+                <div class="step-title-custom">قيد التنفيذ</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">4</span>
+                <div class="step-title-custom">المراجعة</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">5</span>
+                <div class="step-title-custom">انتهاء المشروع</div>
+              </div>
+            </a>
+          </div>
+          <div class="custom-stepper signupintro mobile-stepper p10">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">5</span>
+                <div class="step-title"> مرفوضة </div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div class="openDetails" *ngIf="isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              اعرض تفاصيل المشروع
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+  
+          </div>
+          <div class="openDetails" *ngIf="!isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              إخفاء تفاصيل المشروع
+              <fa-icon [icon]="faChevronUp"></fa-icon>
+            </button>
+  
+          </div>
+          <!-- 
+          <div class="text-center" *ngIf="loggedUserType =='partner'">
+  
+            <div class="reg-font">
+              <button style="margin: 20px 0;" (click)="deliverProjectForClient()" type="button"
+                class="btn btn-success auto-width-btn">
+                تسليم المشروع
+              </button>
+  
+            </div>
+          </div> -->
+        </div>
+  
+        <div *ngIf="selectedProject?.status=='reviewing' && selectedProject?.partnerId!='null' && loggedUserType =='client'"
+          class="custom-stepper ">
+          <div class="rpp-stepper desktop-stepper">
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">1</span>
+                <div class="step-title-custom">انشاء الطلب</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">2</span>
+                <div class="step-title-custom">قبول الكاتب</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">3</span>
+                <div class="step-title-custom">قيد التنفيذ</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">4</span>
+                <div class="step-title-custom">المراجعة</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">5</span>
+                <div class="step-title-custom">انتهاء المشروع</div>
+              </div>
+            </a>
+          </div>
+          <div class="custom-stepper signupintro mobile-stepper p10">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">6</span>
+                <div class="step-title"> بانتظار الاعتماد </div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div class="openDetails" *ngIf="isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              اعرض تفاصيل المشروع
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+  
+          </div>
+          <div class="openDetails" *ngIf="!isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              إخفاء تفاصيل المشروع
+              <fa-icon [icon]="faChevronUp"></fa-icon>
+            </button>
+  
+          </div>
+  
+          <!-- <div class="text-center">
+  
+            <div class="reg-font">
+              <button style="margin: 20px 0;" (click)="showReviewBox()" type="button"
+                class="btn btn-success auto-width-btn">
+                مراجعة المشروع
+              </button>
+              
+  
+  
+            </div>
+          </div> -->
+        </div>
+        <div *ngIf="selectedProject?.status=='completed' && selectedProject?.partnerId!='null'" class="custom-stepper">
+          <div class="rpp-stepper desktop-stepper">
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">1</span>
+                <div class="step-title-custom">انشاء الطلب</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">2</span>
+                <div class="step-title-custom">قبول الكاتب</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">3</span>
+                <div class="step-title-custom">قيد التنفيذ</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">4</span>
+                <div class="step-title-custom">المراجعة</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">5</span>
+                <div class="step-title-custom">انتهاء المشروع</div>
+              </div>
+            </a>
+          </div>
+          <div class="custom-stepper signupintro mobile-stepper p10">
+            <div class="container">
+              <div class="step-item d-flex">
+                <span class="step-count mb0">7</span>
+                <div class="step-title"> مكتملة </div>
+  
+              </div>
+  
+            </div>
+          </div>
+          <div class="openDetails" *ngIf="isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              اعرض تفاصيل المشروع
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+  
+          </div>
+          <div class="openDetails" *ngIf="!isCollapsed">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              إخفاء تفاصيل المشروع
+              <fa-icon [icon]="faChevronUp"></fa-icon>
+            </button>
+  
+          </div>
+  
+        </div>
+  
+  
+  
+        <div
+          *ngIf="selectedProject?.status=='reviewing' && selectedProject?.partnerId!='null' && loggedUserType =='partner'"
+          class="custom-stepper desktop-stepper">
+          <div class="rpp-stepper">
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">1</span>
+                <div class="step-title-custom">انشاء الطلب</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">2</span>
+                <div class="step-title-custom">قبول الكاتب</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+  
+            <a class="stepper-link">
+              <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">3</span>
+                <div class="step-title-custom">قيد التنفيذ</div>
+              </div>
+            </a>
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                <span class="rpp-stepper-item-content">4</span>
+                <div class="step-title-custom">المراجعة</div>
+              </div>
+            </a>
+  
+  
+            <div class="rpp-stepper-divider"></div>
+            <a class="stepper-link">
+              <div class="rpp-stepper-item rpp-stepper-item-pending">
+                <span class="rpp-stepper-item-content">5</span>
+                <div class="step-title-custom">انتهاء المشروع</div>
+              </div>
+            </a>
+          </div>
+          <div class="openDetails">
+            <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+              (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
+              اعرض تفاصيل المشروع
+              <fa-icon [icon]="faChevronDown"></fa-icon>
+            </button>
+  
+          </div>
+  
+          <!-- <div class="text-center" *ngIf="loggedUserType =='partner'">
+  
+            <div class="reg-font">
+              <button style="margin: 20px 0;" (click)="deliverProjectForClient()" type="button" class="btn btn-success auto-width-btn">
+                تسليم المشروع 
+              </button>
+  
+            </div>
+          </div> -->
+        </div>
+  
+      </div>
+    </div>
+  
+  
+    <div [ngbCollapse]="isCollapsed">
+  
+  
+  
+  
+      <div class="card project-item mt30">
+        <div class="card-body">
+          <div class="clearfix">
+            <div class="owner-data float-right">
+              <h5>{{selectedProject?.firstName}} {{selectedProject?.lastName}}</h5>
+              <span class="gray reg-font font-13">{{selectedProject?.createdAt |date : "dd.MM.y h:mm a" }}</span>
+  
+            </div>
+          </div>
+          <h5 class="project-title">{{selectedProject?.projectTitle}}</h5>
+          <h6>{{selectedProject?.briefProject}}</h6>
+          <div class="d-flex  greenlight">
+            <div class="d-flex ml100">
+              <div class="project-icon ">
+                <fa-icon [icon]="faFileAlt"></fa-icon>
+              </div>
+  
+  
+              <div *ngIf="selectedProject?.size==1" class="project-prop">
+                <h6>مشروع قصير</h6>
+                <span>
+                  (600 كلمة)
+                </span>
+              </div>
+              <div *ngIf="selectedProject?.size==2" class="project-prop">
+                <h6>مشروع متوسط</h6>
+                <span>
+                  (1200 كلمة)
+                </span>
+              </div>
+              <div *ngIf="selectedProject?.size==3" class="project-prop">
+                <h6>مشروع طويل</h6>
+                <span>
+                  (2400 كلمة)
+                </span>
+              </div>
+              <div *ngIf="selectedProject?.size==null" class="project-prop">
+                <h6>مشروع غير محدد</h6>
+                <span>
+                  (؟؟؟ كلمة)
+                </span>
+              </div>
+  
+  
+            </div>
+  
+  
+            <div class="d-flex ml100">
+              <div class="project-icon">
+                <fa-icon [icon]="faHourglassHalf"></fa-icon>
+              </div>
+              <div *ngIf="selectedProject?.timePerDay==1" class="project-prop">
+                <h6>مدة التنفيذ 24 ساعة</h6>
+                <span>
+                  (يوم واحد)
+                </span>
+              </div>
+              <div *ngIf="selectedProject?.timePerDay==2" class="project-prop">
+                <h6>مدة التنفيذ 48 ساعة</h6>
+                <span>
+                  (يومين)
+                </span>
+              </div>
+              <div *ngIf="selectedProject?.timePerDay==3" class="project-prop">
+                <h6>مدة التنفيذ 72 ساعة</h6>
+                <span>
+                  (ثلاثة أيام)
+                </span>
+              </div>
+              <div *ngIf="selectedProject?.timePerDay==null" class="project-prop">
+                <h6>مدة التنفيذ غير محددة</h6>
+                <span>
+                  (؟؟؟؟)
+                </span>
+              </div>
+  
+            </div>
+  
+            <div class="d-flex ml100">
+              <div class="project-icon">
+                <fa-icon [icon]="faMoneyBillWave"></fa-icon>
+              </div>
+              <div class="LI45">
+                {{selectedProject?.totalCost}} ريال
+              </div>
+            </div>
+          </div>
+  
+          <div class="row-item">
+            <h6>الكلمات المفتاحية</h6>
+            <ul class="tags d-flex">
+              <li class="tag-item" *ngFor="let tag of tags">{{tag}}</li>
+            </ul>
+          </div>
+          <hr />
+          <div class="row-item">
+            <h6>أفكار تريد التركيز عليها</h6>
+            <p>{{selectedProject?.projectIdea}}</p>
+          </div>
+          <hr />
+  
+  
+          <div class="row-item">
+            <h6>المصادر المقترحة</h6>
+            <p class="reg-font">{{selectedProject?.resource}}</p>
+          </div>
+          <hr />
+          <div class="row-item">
+            <h6>الروابط</h6>
+            <ul class="helpfulLinks ">
+              <li class="helpfulLinkItem reg-font" *ngFor="let helpfulLink of helpfulLinks">{{helpfulLink}}</li>
+            </ul>
+          </div>
+  
+        </div>
+      </div>
+  
+  
+  
+  
+  
+  
+  
+   
+  
+  
+ 
+  
+   
+     
+  
+
+
+  
+  
+  
+  
+  
+  
+  
+  
+    </div>
+
+  
+  
+
+
+  
+  
+  
+    
+   
+  
+
+  
+
+
+
+
+  
+  
+   
+ 
+
+  
+  
+  </div>
+  
+  <div *ngIf="projectDataNotExist" class="container" style="margin-top:150px;">
+    <div class="text-center noProjectsMessage">
+      <fa-icon [icon]="faFolderOpen"></fa-icon>
+      <h4>لا يوجد مشروع بالبيانات المطلوبة</h4>
+    </div>
+  
+  </div>
+  
+  
+  <div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+  
+
+  
+
+  
+  
+  
+
+  
+
+
+  
+  <app-footer-inner></app-footer-inner>
