@@ -1,0 +1,91 @@
+<header class="after-login-header fixed-header p-header">
+    <div class=" text-center">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <img class="inner-logo" src="../../../assets/images/logo.png" />
+  
+  
+  
+  <!-- <pre>{{profileMessages | json}}</pre> -->
+  
+  
+        <div class="collapse navbar-collapse d-none d-sm-block" id="navbarText">
+          <ul class="navbar-nav mr-auto ">
+  
+            <!-- <li class="nav-item ml30">
+              <div class="btn-group no-arrow">
+                <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                  <button class="btn plr0 noarrow font20" ngbDropdownToggle>
+                    <fa-icon [icon]="faBell"></fa-icon>
+                  </button>
+                  <div class="dropdown-menu" ngbDropdownMenu>
+                    <div class="drop-down-title">
+                      <h6 class="notification-title">الإشعارات</h6>
+                    </div>
+                    <button ngbDropdownItem>تم قبول طلب من العميل. ابدأ الأن</button>
+                    <button ngbDropdownItem>تم قبول طلب من العميل. ابدأ الأن</button>
+                    <button ngbDropdownItem>تم قبول طلب من العميل. ابدأ الأن</button>
+                  </div>
+                </div>
+              </div>
+            </li> -->
+            <li class="nav-item ml30">
+              <div class="btn-group no-arrow">
+                <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                  <button class="btn plr0 noarrow font20" ngbDropdownToggle>
+                    <span *ngIf="unreadMessagesArray.length>0"
+                      class="badge badge-light">{{unreadMessagesArray.length}}</span>
+                    <fa-icon [icon]="faEnvelope"></fa-icon>
+                  </button>
+                  <div class="dropdown-menu" ngbDropdownMenu>
+                    <div class="drop-down-title">
+                      <h6 class="notification-title">الرسائل</h6>
+                    </div>
+                 
+                    <div style="color: #247d8f;cursor: pointer;" (click)="openAllMessags(message)" ngbDropdownItem
+                    *ngFor="let message of messagesStorage" [ngClass]="message.read? 'read' : 'unRead'"
+                    class="clearfix message">
+                    <div class="project-small-image float-right">
+                      <img src="../../assets/images/profile/avatar.png">
+                    </div>
+                    <div class="owner-data">
+                      <h5>{{message._id.fromName}}</h5>
+                      <span class="gray reg-font font-13">{{message.createAt | date : "dd.MM.y h:mm a" }}</span>
+                    </div>
+                    <p class="message-brief">{{message.message}}</p>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item profile-small-image ml30">
+              <div class="btn-group no-arrow">
+                <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+                  <button class="dropdown-toggle btn noarrow p0" ngbDropdownToggle>
+                    <img src="../../assets/images/profile/avatar.png" />
+                  </button>
+  
+                  <div class="dropdown-menu" ngbDropdownMenu>
+                    <div class="drop-down-title">
+                      <h6 class="notification-title">مرحباً {{userName}}</h6>
+                    </div>
+                    <button routerLink="/profile" ngbDropdownItem>
+                      <fa-icon class="ml5" [icon]="faUserAlt"></fa-icon>تعديل البيانات الشخصية
+                    </button>
+                    <div class="drop-down-footer">
+                      <button (click)="signOut()" type="button" ngbDropdownItem>
+                        <fa-icon class="ml5" [icon]="faSignOutAlt"></fa-icon>تسجيل الخروج
+                      </button>
+  
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </li>
+  
+  
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </header>

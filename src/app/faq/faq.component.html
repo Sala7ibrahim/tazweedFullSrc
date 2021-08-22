@@ -1,0 +1,533 @@
+<app-header></app-header>
+<div class="main-content">
+  <div class="container">
+    <div class="page-wrapper row">
+      <div class="col-lg-6 col-sm-12 col-12">
+
+
+
+        <div class="accordion-item">
+
+
+          <h6 class="project-title">أسئلة العميل</h6>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed = !isCollapsed;" [attr.aria-expanded]="!isCollapsed"
+                  aria-controls="collapseExample">
+                  كيف أستفيد من تزويد؟
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed">
+              <div class="card-body ">
+                <p>
+                  ابتكرنا تزويد ليكون التسويق بالمحتوى والحصول على خدمات الكتابة أسهل المهام في قائمة أعمالك، فأنت
+                  تستفيد
+                  من
+                  تزويد بالحصول على عدد لا محدود من المواهب والخبراء ليكتبوا لك المحتوى الذي تطلبه، وفي الوقت الذي تريد.
+                  قدم
+                  طلبك واحصل على الخدمة.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed2 = !isCollapsed2" [attr.aria-expanded]="!isCollapsed2"
+                  aria-controls="collapseExample">
+                  هل تزويد فقط لكتابة المقالات؟
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed2">
+              <div class="card-body ">
+                <p>
+                  حاليا لا يتوفر سوى كتابة المقالات، وقريبا سنوفر لعملائنا قائمة من أنواع المحتوى الأخرى التي تساعدهم في
+                  الوصول إلى الجمهور ليس بأسرع طريقة وحسب، وإنما بأفضل جودة كي نضمن لعملائنا علاقة طيبة مع محركات البحث،
+                  وتواصل ناجح مع الجمهور.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed3 = !isCollapsed3" [attr.aria-expanded]="!isCollapsed3"
+                  aria-controls="collapseExample">
+                  هل أستطيع طلب أكثر من مقال في وقت واحد؟
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed3">
+              <div class="card-body">
+                <p>
+                  بالتأكيد، هذا الذي يجعل تزويد مختلفا، فبدلا من قضاء ساعات في كتابة مقال بنفسك، أو توظيف كاتب إنتاجيته
+                  محدودة، تستطيع اليوم طلب عشرات المقالات من عشرات الكتاب، وتكون جاهزة للنشر في وقت وجيز أنت تحدده. مع
+                  تزويد
+                  لا حدود للإمكانات.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed4 = !isCollapsed4" [attr.aria-expanded]="!isCollapsed4"
+                  aria-controls="collapseExample">
+                  هل أستطيع التسجيل كعميل وكاتب في نفس الوقت؟
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed4">
+              <div class="card-body">
+                <p>
+                  نعم تستطيع، وتستطيع كذلك التسجيل بنفس الإيميل، ولكن تحتاج للتسجيل مرتين، مرة كاتب، ومرة عميل، ثم عند
+                  تسجيل
+                  الدخول في كل مرة تحدد هل تريد تسجيل الدخول كعميل أو كاتب.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed5 = !isCollapsed5" [attr.aria-expanded]="!isCollapsed5"
+                  aria-controls="collapseExample">
+                  هل أستطيع اختيار الكاتب بنفسي؟
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed5">
+              <div class="card-body">
+                <p>
+                  بالتأكيد أنت من يختار الكاتب، ولكننا نختصر لك الوقت ونريحك من عناء البحث عن الكاتب المميز. عند تقديم
+                  المشروع يقوم تزويد بعرضه على الكتّاب المختارين بعناية، وبعدما يتقدم أحدهم لتنفيذ المشروع ستظهر لك
+                  رسالة
+                  فيها نبذة عن الكاتب وتقييماته، فإن أعجبك تضغط على "قبول"، ويبدأ هو بالعمل، وإن لم يعجبك تضغط على "رفض"
+                  ويذهب مشروعك إلى قائمة الكتاب مرة أخرى.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed6 = !isCollapsed6" [attr.aria-expanded]="!isCollapsed6"
+                  aria-controls="collapseExample">
+                  هل أستطيع تعديل الطلب؟
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed6">
+              <div class="card-body ">
+                <p>
+                  بالتأكيد، بإمكانك تعديل الطلب في أي مرحلة قبل قبول الكاتب.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsedd1 = !isCollapsedd1" [attr.aria-expanded]="!isCollapsedd1"
+                  aria-controls="collapseExample">
+                  ماذا لو كانت قيمة الطلب مختلفة بعد التعديل؟
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsedd1">
+              <div class="card-body ">
+                <p>
+                  في حال تعديل الطلب وأصبحت التكلفة الجديدة أكثر من السابقة فسيتم توجيهك إلى بوابة الدفع لتدفع الفرق
+                  الزائد. أما في حال كانت التكلفة الجديدة أقل من المبلغ المدفوع سابقا فإنك ستحصل على كود خصم بقيمة
+                  المبلغ الفارق، و يضاف إلى رصيدك للاستخدام في المرة القادمة. بإمكانك الاطلاع على أكواد الخصم في صفحتك.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed7 = !isCollapsed7" [attr.aria-expanded]="!isCollapsed7"
+                  aria-controls="collapseExample">
+                  هل أستطيع استعادة المال إذا لم تعجبني الخدمة؟
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed7">
+              <div class="card-body">
+                <p>
+                  مع تزويد لن نأخذ منك المال إلا مقابل خدمة مميزة. في حال لم يعجبك تنفيذ المشروع بإمكانك الضغط على
+                  أيقونة "رفض" وكتابة ملاحظاتك للكاتب، وسيعود له المقال مرة أخرى لينفذ التعديلات، وفي حال لم يعجبك حتى
+                  بعد التعديل، فبإمكانك كذلك الضغط على أيقونة "رفض"، وفي هذه الحالة لن يتمكن الكاتب من تنفيذ مشروعك،
+                  وسيراجع فريق خدمة العملاء طلبك ويتأكد من أن الكاتب لم يقدم الخدمة كما ينبغي، ويعود طلبك إلى صفحة
+                  المشاريع ليخدمك كاتب آخر.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed8 = !isCollapsed8" [attr.aria-expanded]="!isCollapsed8"
+                  aria-controls="collapseExample">
+                  ما الذي يحدث لو تأخر الكاتب في تسليم المشروع؟
+
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed8">
+              <div class="card-body">
+                <p>
+                  نحرص أن يكون جميع الكتاب على قدر عال من المسوولية والالتزام، ولكن إن حدث تأخير فبإمكانك إلغاء المشروع،
+                  وحينها سيعود طلبك إلى صفحة المشاريع ليخدمك كاتب آخر. كما نرجو منك مساعدتنا في تحسين الخدمة وذلك بتقييم
+                  الكاتب بحسب ما يستحقه، وذلك لضمان تقديم أفضل خدمة ممكنة.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed9 = !isCollapsed9" [attr.aria-expanded]="!isCollapsed9"
+                  aria-controls="collapseExample">
+                  هل بالإمكان التواصل مع الكاتب خارج تزويد؟
+
+
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed9">
+              <div class="card-body reg-font">
+                <p>
+                  لا أحد يستطيع حجب التواصل في فضاء الإنترنت المفتوح، وبالتأكيد حين تقرر التواصل مع الكاتب خارج تزويد
+                  فأنت
+                  تختار الطريقة التقليدية في البحث عن الكتاب والتفاوض معهم والمخاطرة بالوقت والجهد والمال، ويكون غيرك قد
+                  حصل
+                  على عشر مقالات وأكثر في وقت أقل وجهد أقل.
+                </p>
+                <p>
+                  ليس هدفنا في تزويد أن نحتكر الكتاب الموهوبين وإنما صناعة تجربة جديدة يربح فيها العميل والكاتب.
+                  استخدامك
+                  لتزويد يمنحك تجربة جديدة في صناعة المحتوى، فيها سرعة وإنتاجية وتوثيق لحقوق جميع الأطراف بطريقة لا تحدث
+                  في
+                  العمل التقليدي، وإذا فشلنا في إغرائك بالاستغناء عن الطريقة التقليدية فنحن لم نحقق الهدف.
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+
+      </div>
+      <div class="col-lg-6 col-sm-12 col-12">
+
+
+
+        <div class="accordion-item">
+
+
+          <h6 class="project-title">أسئلة الكاتب
+          </h6>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed10 = !isCollapsed10;" [attr.aria-expanded]="!isCollapsed10"
+                  aria-controls="collapseExample">
+                  كيف أستفيد من تزويد؟
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed10">
+              <div class="card-body ">
+                <p>
+                  يساعدك تزويد في تقديم خدمات الكتابة لعدد لا محدود من العملاء، وبطريقة تختصر وقتك وتزيد إنتاجيتك، وفوق
+                  هذا كله يريحك من أعباء التفاوض أو التعامل مع عملاء محتالين. سجل مع تزويد وابدأ بكسب المال عن طريق
+                  الكتابة.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed11 = !isCollapsed11" [attr.aria-expanded]="!isCollapsed11"
+                  aria-controls="collapseExample">
+                  هل الكتابة في تزويد متاحة للجميع؟
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed11">
+              <div class="card-body ">
+                <p>
+                  لا، الكتابة في تزويد متاحة للكتاب والكاتبات المحترفين فقط، والذين يثبتون قدرتهم على كتابة محتوى مميز،
+                  فنحن نحرص على تقديم خدمة مميزة للعملاء حتى يكون تزويد خيارهم الأول في صناعة المحتوى وخدمات الكتابة،
+                  وبذلك يحصل الكاتب مع تزويد على مشاريع جديدة كل يوم.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed12 = !isCollapsed12" [attr.aria-expanded]="!isCollapsed12"
+                  aria-controls="collapseExample">
+                  كيف أستطيع تقديم خدماتي في تزويد؟
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed12">
+              <div class="card-body">
+                <p>
+                  كل ما عليك هو التسجيل، وانتظار تفعيل عضويتك حتى تبدأ بالتقديم على مشاريع الكتابة التي تناسبك.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed13 = !isCollapsed13" [attr.aria-expanded]="!isCollapsed13"
+                  aria-controls="collapseExample">
+                  هل تزويد فقط لكتابة المقالات؟
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed13">
+              <div class="card-body">
+                <p>
+                  حاليا لا يتوفر سوى خدمة كتابة المقالات، وقريبا سنوفر لعملائنا قائمة من أنواع المحتوى الأخرى التي ستكون
+                  مصدر دخل لكل كاتب مع تزويد.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed14 = !isCollapsed14" [attr.aria-expanded]="!isCollapsed14"
+                  aria-controls="collapseExample">
+                  هل أستطيع التسجيل ككاتب وعميل في نفس الوقت؟
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed14">
+              <div class="card-body">
+                <p>
+                  نعم تستطيع، وتستطيع كذلك التسجيل بنفس الإيميل، ولكن تحتاج للتسجيل مرتين، مرة كاتب، ومرة عميل، ثم عند
+                  تسجيل الدخول في كل مرة تحدد هل تريد تسجيل الدخول كعميل أو كاتب.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed15 = !isCollapsed15" [attr.aria-expanded]="!isCollapsed15"
+                  aria-controls="collapseExample">
+                  هل بالإمكان التواصل مع العميل خارج تزويد؟
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed15">
+              <div class="card-body ">
+                <p>
+                  لا أحد يستطيع حجب التواصل في فضاء الإنترنت المفتوح، وبالتأكيد حين تقرر التواصل مع العميل خارج تزويد
+                  فأنت
+                  تختار الطريقة التقليدية في مشاريع الكتابة وتخاطر بالوقت والجهد والمال، ويكون غيرك قد نفذ مشاريع أكثر
+                  مع
+                  عملاء يتعاملون باحترافية ويعرفون ماذا يريدون ولا يفكرون في التفاوض.
+
+                </p>
+                <p>
+                  ليس هدفنا في تزويد أن نحتكر الكتاب الموهوبين وإنما صناعة تجربة جديدة يربح فيها الكاتب والعميل.
+                  استخدامك
+                  لتزويد يمنحك تجربة جديدة في مشاريع الكتابة، فيها وضوح وتطوير وتوثيق لحقوق جميع الأطراف بطريقة لا تحدث
+                  في
+                  العمل التقليدي، وإذا فشلنا في إغرائك بالاستغناء عن الطريقة التقليدية فنحن لم نحقق الهدف.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapseddd20 = !isCollapseddd20" [attr.aria-expanded]="!isCollapseddd20"
+                  aria-controls="collapseExample">
+                  هل بالإمكان الانسحاب من المشروع؟
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapseddd20">
+              <div class="card-body">
+                <p>
+                  بالتأكيد بإمكانك الانسحاب في أي وقت، ولكن ذلك سيؤثر على تقييمك وعلى سمعتك، فجميع الانسحابات ستكون
+                  ظاهرة في صفحتك التي يشاهدها العميل حين تتقدم للمشروع، والعملاء بالتأكيد لا يريدون المغامرة مع ذوي
+                  الانسحابات الكثيرة. لذلك لا تتقدم بطلب تنفيذ المشاريع إلا وأنت متأكد من قدرتك ووقتك المتاح.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapseddd30 = !isCollapseddd30" [attr.aria-expanded]="!isCollapseddd30"
+                  aria-controls="collapseExample">
+                  ما الذي يترتب على الانسحاب من المشروع؟
+
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapseddd30">
+              <div class="card-body">
+                <p>
+                  كما هو واضح في الإجابة السابقة أن تقييمك وسمعتك يتأثران بالانسحابات، ولكن أيضا حتى نضمن جودة الخدمة
+                  ونساعد الكاتب في تقليل الانسحابات فإن رصيدك سيتأثر بحسم ١٠٠ ريال عن كل ٣ انسحابات. فلذلك لا تتقدم بطلب
+                  تنفيذ المشاريع إلا بعد الاطلاع على تفاصيلها جيدا والتأكد من قدرتك ووقتك المتاح.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <button type="button" class="btn btn-outline-primary no-border-btn no-bg-btn"
+                  (click)="isCollapsed16 = !isCollapsed16" [attr.aria-expanded]="!isCollapsed16"
+                  aria-controls="collapseExample">
+                  متى أحصل على مستحقاتي المالية؟
+
+
+
+
+                </button>
+              </h5>
+            </div>
+            <div [ngbCollapse]="isCollapsed16">
+              <div class="card-body">
+                <p>
+                  بعد كل مشروع تُضاف مستحقاتك إلى رصيدك، وعند وصول الرصيد إلى ١٠٠٠ ريال أو أكثر يتم إرسال المستحقات مطلع
+                  الشهر، وسنعمل على إتاحة خيار التحويل السريع ولكننا نبحث عن أفضل الحلول لكتاب تزويد بحيث لا يتحملون
+                  رسوم
+                  حوالات باهظة.
+
+                </p>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+  </div>
+</div>
+
+<app-footer></app-footer>

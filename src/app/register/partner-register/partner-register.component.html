@@ -1,0 +1,243 @@
+<app-header></app-header>
+<div class="custom-stepper signupintro desktop-stepper" *ngIf="showFormSubmit">
+  <div class="container">
+
+
+    <div class="rpp-stepper">
+      <div class="rpp-stepper-divider short arrow-one"></div>
+      <a class="stepper-link">
+        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-pending">
+          <span class="rpp-stepper-item-content">1</span>
+          <div class="step-title-custom">تصفح الطلبات</div>
+        </div>
+      </a>
+
+
+      <div class="rpp-stepper-divider tall"></div>
+      <a class="stepper-link">
+        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-pending">
+          <span class="rpp-stepper-item-content">2</span>
+          <div class="step-title-custom">اكتب محتوى
+          </div>
+        </div>
+      </a>
+      <div class="rpp-stepper-divider tall"></div>
+
+      <a class="stepper-link">
+        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-pending">
+          <span class="rpp-stepper-item-content">3</span>
+          <div class="step-title-custom">اكسب فلوس</div>
+        </div>
+      </a>
+      <div class="rpp-stepper-divider short arrow-four"></div>
+
+
+
+    </div>
+  </div>
+</div>
+<div class="main-content">
+  <div class="container">
+
+
+    <div *ngIf="showFormSubmit">
+      <div class="form-title mt0">
+        <h1 class="pt20">أهلا بالكاتب المبدع</h1>
+        <h1>أنت على وشك الانطلاق مع تزويد</h1>
+        <div class="anotherRegisteration">
+          <span class="ask reg-font">تريد التسجيل كعميل؟</span><a routerLink="/clientRegister">اضغط هنا</a>
+        </div>
+      </div>
+      <div class="row">
+
+
+        <form (keydown.enter)="$event.preventDefault()" class="col-lg-6 col-md-6 col-sm-12 col-12"
+          [(formGroup)]="registerForm" (ngSubmit)="register()">
+          <div class="row">
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <input type="text" name="firstName" class="form-control" formControlName="firstName"
+                  placeholder="الاسم الاول" />
+                <span class="error-help"
+                  *ngIf="!registerForm.get('firstName').valid && registerForm.get('firstName').touched">
+                  <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                  ادخل الاسم
+                  الاول
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-12">
+              <div class="form-group">
+                <input type="text" name="lastName" class="form-control" formControlName="lastName"
+                  placeholder="اسم العائلة" />
+                <span class="error-help"
+                  *ngIf="!registerForm.get('lastName').valid && registerForm.get('lastName').touched">
+                  <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                  ادخل اسم
+                  العائلة
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="form-group">
+                <input type="email" email name="email" class="form-control" formControlName="email"
+                  placeholder="البريد الالكترونى">
+                <span class="help-block error-help"
+                  *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">
+                  <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                  ادخل
+                  البريد الالكترونى
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="form-group">
+
+                <select id="country" class="form-control" [ngClass]="notSelected?'error':''" formControlName="country">
+                  <option value="0" disabled>اختار البلد</option>
+                  <option [value]="country?.nativeName" *ngFor="let country of allCountries">{{country?.nativeName}}
+                  </option>
+                  <!-- <option>السعودية</option> -->
+                </select>
+                <span class="help-block error-help" *ngIf="!registerForm.get('country').valid">
+                  <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                  اختار البلد
+                </span>
+              </div>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="form-group">
+                <input type="text" name="userName" class="form-control" formControlName="userName"
+                  placeholder="اسم المستخدم (مثال Nasir)">
+                <span class="help-block error-help"
+                  *ngIf="!registerForm.get('userName').valid && registerForm.get('userName').touched">
+                  <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                  ادخل
+                  اسم المستخدم
+                </span>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="form-group relative">
+                <input id="password" type="password" name="password" class="form-control" formControlName="password"
+                  placeholder="كلمة المرور">
+                <span class="showHidePassword" *ngIf="showPasswordIcon" (click)="showPassword('password')">
+                  <fa-icon [icon]="faEye"></fa-icon>
+                </span>
+                <span class="showHidePassword" *ngIf="hidePasswordIcon" (click)="hidePassword('password')">
+                  <fa-icon [icon]="faEyeSlash"></fa-icon>
+                </span>
+                <span class="help-block error-help"
+                  *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
+                  <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                  password must be at
+                  least 8 characters long
+                </span>
+              </div>
+
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+              <h1>استعرض كتابتك</h1>
+              <p class="normal-font">
+                من فضلك أخبرنا لماذا تحب الانضمام إلى تزويد وما الذي يجعلك تستحق أن تكون بين نخبة من الكتاب المبدعين؟
+                (حد أدنى ٢٠٠ كلمة)
+              </p>
+              <quill-editor formControlName="writingAbility" placeholder="أدخل المحتوى ..."
+                [styles]="{height: '200px'}"></quill-editor>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-12">
+              <h1 class="mt20">استعرض مهارتك البحثية</h1>
+              <p class="normal-font">
+                استعن بمصادر محلية وعالمية ثم أخبرنا ما هي الأسباب التي تجعل الشركات حريصة على التسويق بالمحتوى. (حد
+                أدنى ٢٠٠ كلمة)
+              </p>
+              <span class="ask reg-font register-note">ملاحظة: في حال وجود سرقة أدبية فإن طلبك سيُرفض مباشرة.</span>
+              <quill-editor formControlName="searchingAbility" placeholder="أدخل المحتوى ..."
+                [styles]="{height: '200px'}"></quill-editor>
+
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+
+              <p>
+
+                ملاحظة: بعد إتمام التسجيل سنراجع طلبك، وفي حال حصولك على تقييم ممتاز سيتم تفعيل عضويتك ويصبح بإمكانك
+                البدء بتنفيذ مشاريع كتابة لعملائنا المميزين وكسب المال الذي يستحقه المبدعون أمثالك.
+
+
+              </p>
+            </div>
+
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="anotherRegisteration mb20">
+                <span class="ask reg-font">بإنشائك حساب جديد فأنت توافق على</span><a routerLink="">شروط وأحكام استخدام
+                  تزويد</a>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="clearfix text-center mb10">
+                <button [disabled]="!registerForm.valid" class="btn btn-success" type="submit">إتمام التسجيل</button>
+              </div>
+            </div>
+            <div class="col-lg-12 col-md-12 col-12">
+              <div class="anotherRegisteration">
+                <span class="ask reg-font">لديك حساب مع تزويد؟</span><a routerLink="/login">سجل الدخول </a>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="showLoader" class="loader">
+            <div class="cssload-container">
+              <div class="cssload-speeding-wheel"></div>
+            </div>
+          </div>
+        </form>
+        <div class="clearfix"></div>
+        <div *ngIf="showFailMessage" class="text-center fails stickyMessage ">
+          <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+          <h2 *ngIf="errorDetails =='This email is used'">تم التسجيل من قبل باستخدام هذا البريد الالكترونى</h2>
+          <h2 *ngIf="errorDetails !='This email is used'">{{errorDetails}}</h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="custom-stepper signupintro mobile-stepper">
+    <div class="container">
+
+
+      <div class="step-item">
+        <span class="step-count">1</span>
+        <div class="step-title">تصفح الطلبات</div>
+
+      </div>
+      <div class="step-item">
+        <span class="step-count">2</span>
+        <div class="step-title">اكتب محتوى</div>
+
+      </div>
+      <div class="step-item">
+        <span class="step-count">3</span>
+        <div class="step-title">اكسب فلوس</div>
+
+      </div>
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+  <div class="text-center success-project" *ngIf="showSuccessMessage">
+    <fa-icon [icon]="faCheckCircle"></fa-icon>
+    <p>
+      نجحت في التسجيل، وسيصلك إيميل لتفعيل حسابك. (أحيانا يختبئ في السبام)
+    </p>
+  </div>
+</div>
+
+<app-footer></app-footer>

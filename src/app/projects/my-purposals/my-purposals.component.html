@@ -1,0 +1,105 @@
+<app-after-login-header></app-after-login-header>
+<div class="container">
+  <div class="page-wrapper">
+    <div *ngFor="let purposal of myPurposals ">
+      <div>
+        <!-- <h1>{{purposal | json}}</h1> -->
+        <div class="card project-item">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h6><a class="project-title" style="cursor: pointer;"
+                      (click)="openProject(purposal?.jobId)">{{purposal?.projectTitle}}</a></h6>
+
+                    <div class="d-flex">
+                      <h6 class="reg-font mt5">
+                        {{purposal?.createdAt | date}}
+                      </h6>
+                    </div>
+
+
+                </div>
+                <hr/>
+                <div *ngIf="purposal?.status =='accepted'"  class="d-flex justify-content-between">
+                  <div>
+                    <span class="dot active"></span> 
+                    تم القبول
+                  </div>
+          
+
+                </div>
+                <div *ngIf="purposal?.status =='inprogress'" class="d-flex justify-content-between">
+                  <div>
+                    <span class="dot inprogress"></span> 
+                    بانتظار القبول
+                  </div>
+          
+                  <div *ngIf="purposal?.isAbletoRemove ==true">
+                    <button (click)="rejectPurposal(purposal?._id)"  type="button"
+                    class="btn btn-success admin-danger-btn float-right auto-width-btn admin-btn">
+                    <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+                    إلغاء
+                  </button>
+                  </div>
+                </div>
+                <div *ngIf="purposal?.status =='rejected'" class="d-flex justify-content-between">
+                  <div>
+                    <span class="dot  rejected"></span> 
+                    مرفوض
+                  </div>
+          
+
+                </div>
+                
+   
+
+
+
+                
+              </div>
+            </div>
+      </div>
+    </div>
+
+
+
+    <div *ngIf="myPurposals?.length==0"
+    class="project-item">
+    <div class="card-body">
+      <h6 class="project-title">العروض المقدمة</h6>
+      <div class="purposals-container no-purposals text-center">
+        <img src="../../../assets/images/zero.svg" />
+        <h6>لا يوجد عروض حتى الآن</h6>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+
+
+</div>
+<app-footer-inner></app-footer-inner>
+
+<div *ngIf="showLoader" class="loader loaderMaster">
+  <div class="cssload-container">
+    <div class="cssload-speeding-wheel"></div>
+  </div>
+</div>
+
+
+<div *ngIf="cancelpurposalMode" class="modal2 custom-modal custom-modal22" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">الغاء العرض </h5>
+        <button (click)="closeCancelPurposalDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p15 text-right">
+
+      <p *ngIf="cancelFail">خطأ فى الغاء العرض</p>
+      </div>
+    </div>
+  </div>
+</div>

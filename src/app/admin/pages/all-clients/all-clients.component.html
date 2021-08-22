@@ -1,0 +1,197 @@
+<div class="main-content">
+<div class="profiles-data admin-table-container">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">أسم العميل</th>
+          <th scope="col">حالة العميل</th>
+          <th scope="col">البلد</th>
+          <th scope="col">عدد المشاريع</th>
+          <th scope="col">تاريخ الاشتراك</th>
+          <th *ngIf="takeActionsPrivilage" scope="col"></th>
+          <th *ngIf="takeActionsPrivilage" scope="col"></th>
+        </tr>
+      </thead>
+      <tbody> 
+        <tr *ngFor="let client of allClients">
+          <td><a (click)="previewProfileData(client)"
+              style="cursor: pointer;color: #247D8F;text-decoration: underline;">{{client?.firstName}}
+              {{client?.lastName}}</a></td>
+          <td *ngIf="client?.status=='active'">
+            <span class="dots green"></span> مفعل
+          </td>
+          <td *ngIf="client?.status=='pending' || client?.status=='deactivate'">
+            <span class="dots red"></span>معطل
+          </td>
+          <td>{{client?.country}}</td>
+          <td>{{client?.numOfCompletedJobs}}</td>
+          <td>{{client?.createdAt | date : "dd.MM.y h:mm a" }}</td>
+
+          
+          <td *ngIf="takeActionsPrivilage">
+            
+            <button style="margin-right: 20px;" (click)="sendMeaasge(client)" type="button"
+              class="noBorderNoBgBtn gray-btn float-right">
+              <fa-icon class="ml5" [icon]="faCommentDots"></fa-icon>
+              رسالة
+            </button>
+              <button  (click)="showDeleteUserDialog(client)" type="button"
+                class="noBorderNoBgBtn gray-btn float-right">
+                <fa-icon class="ml5" [icon]="faTrashAlt"></fa-icon>
+                حذف</button>
+          </td>
+
+          <td *ngIf="takeActionsPrivilage">
+            <button (click)="showActive(client)" style="margin-left: 10px;" *ngIf="client?.status=='pending' || client?.status=='deactivate' "
+              type="button" class="noBorderNoBgBtn light-gray-btn float-right">
+              <fa-icon class="ml5 font-18" [icon]="faToggleOff"></fa-icon>
+              <!-- تفعيل الحساب -->
+            </button>
+            <button (click)="showDeactive(client)" style="margin-left: 10px;" *ngIf="client?.status=='active'"
+              type="button" class="noBorderNoBgBtn green-master-btn float-right">
+              <fa-icon class="ml5 font-18" [icon]="faToggleOn"></fa-icon>
+              <!-- تعطيل الحساب -->
+            </button>
+
+            
+          </td>
+        </tr>
+
+
+      </tbody>
+    </table>
+  </div>
+
+  
+  <div *ngIf="showActiveConfirmMessage" class="modal2 custom-modal custom-modal22 admin-dlg" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">تفعيل حساب {{itemToEdit?.firstName}} {{itemToEdit?.lastName}}</h5>
+          <button (click)="closeActiveDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-right">
+          <button (click)="activateAccount(itemToEdit?._id)" type="button"
+            class="btn btn-success float-right auto-width-btn admin-btn">
+            <fa-icon class="ml5" [icon]="faCheck"></fa-icon>
+            تفعيل الحساب
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showDeactiveConfirmMessage" class="modal2 custom-modal custom-modal22 admin-dlg" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">تعطيل الحساب {{itemToEdit?.firstName}} {{itemToEdit?.lastName}}</h5>
+          <button (click)="closeDeactiveDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-right">
+
+          <button (click)="deActivateAccount(itemToEdit._id)" type="button"
+            class="btn btn-success admin-danger-btn float-right auto-width-btn admin-btn">
+            <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+            تعطيل الحساب
+          </button>
+
+          <button (click)="closeDeactiveDialog()" type="button" style="margin-left: 10px;"
+            class="btn btn-success float-right auto-width-btn admin-btn">
+            خروج
+          </button>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- message dialog -->
+      <div *ngIf="showMessageDialog" class="modal2 custom-modal custom-modal22 admin-dlg message-dlg" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h6 class="modal-title">
+                <fa-icon class="ml5" [icon]="faEnvelope2"></fa-icon>الرسائل
+              </h6>
+              <button (click)="closeMessageDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-right">
+              <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="sendMessageSpecificUserForm"
+                (ngSubmit)="sendMeaage()">
+                <!-- <h6>{{messageReceiver._id}}</h6> -->
+                <textarea formControlName="message" style="margin-bottom: 15px;" class="form-control"
+                  placeholder="اكتب رسالتك هنا"></textarea>
+                <div class="d-flex">
+                  <button style="margin-left: 10px;" type="submit"
+                    class="btn btn-success float-right auto-width-btn admin-btn">
+                    اضف رسالة
+                  </button>
+  
+                  <button (click)="closeMessageDialog()" type="button"
+                    class="btn btn-success no-bg-btn float-right auto-width-btn admin-btn">
+                    إلغاء
+                  </button>
+  
+                </div>
+                <p *ngIf="showsendSuccess">تم ارسال الرسالة بنجاح</p>
+                <p *ngIf="showsendFail">حدث خطأ اثناء الارسال</p>
+              </form>
+  
+  
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="showLoader" class="loader loaderMaster">
+        <div class="cssload-container">
+          <div class="cssload-speeding-wheel"></div>
+        </div>
+      </div>  
+
+
+
+      
+<div *ngIf="deleteUserMode" class="modal2 custom-modal custom-modal22" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">حذف الحساب </h5>
+        <button (click)="closeDeleteUserDialog()" type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p15 text-right">
+
+        <!-- <h1>{{userToDelete | json}}</h1> -->
+        <div class="d-flex">
+
+          <button (click)="closeDeleteUserDialog()" style="margin-left: 10px;" type="button"
+            class="btn btn-success float-right auto-width-btn admin-btn">
+            <!-- <fa-icon class="ml5" [icon]="faCheck"></fa-icon> -->
+            إلغاء
+
+          </button>
+          <button (click)="deleteUserProfile()" type="button" style="margin-left: 10px;"
+            class="btn btn-success float-right auto-width-btn admin-btn">
+            <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+            سيتم حذف بيانات الحساب بالكامل
+          </button>
+
+        </div>
+        <p *ngIf="deleteSuccess">تم حذف الحساب </p>
+        <p *ngIf="deleteFail">حدث خطأ اثناء حذف الحساب </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,3809 @@
+<div class="adminProjects">
+
+
+    <tabset class="horizontal-tabs" type="pills">
+      <tab>
+        <ng-template tabHeading>
+          كل المشاريع
+        </ng-template>
+        <div *ngFor="let project of allJobsAdmin ">
+          <div *ngIf="project?.status =='prePayment'">
+
+            <!-- client part -->
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+
+ 
+
+
+                  </div>
+
+                  <div *ngIf="project.status=='prePayment'" class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+
+            </div> -->
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date}}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot prepayment"></span> 
+                      معلقة
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="project.status =='active'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+                  </div>
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+
+                </div>
+
+
+
+              </div>
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot active"></span> 
+                      نشط
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+                  <!-- <div class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div> -->
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+          <div *ngIf="project.status =='pending'">
+
+
+            <!-- client part -->
+            <!-- <div>
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot pending"></span> 
+                      عروض الكتاب
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+          <div *ngIf="project?.status =='inprogress'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date}}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot inprogress"></span> 
+                      قيد التنفيذ
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+          <div *ngIf="project?.status =='reviewing'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date}}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot reviewing"></span> 
+                      بانتظار الاعتماد 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+          <div *ngIf="project.status =='rejected'">
+
+            <!-- client part -->
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+
+
+
+
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot rejected"></span> 
+                      مرفوضة 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="project.status =='completed'">
+
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div *ngIf="project.status=='completed'" class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot completed"></span> 
+                      مكتملة
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+
+        </div>
+        <!-- <div *ngFor="let project of expiredJobs ">
+          <div *ngIf="project?.status =='prePayment'">
+
+            <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+
+                  </div>
+
+                  <div *ngIf="project.status=='prePayment'" class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+
+
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+
+          </div>
+
+
+          <div *ngIf="project.status =='active'">
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+                  </div>
+
+
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+          </div>
+
+
+          <div *ngIf="project.status =='pending'">
+
+
+ 
+            <div>
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+          </div>
+
+          <div *ngIf="project.status =='inprogress'">
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+
+          <div *ngIf="project.status =='reviewing'">
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+          <div *ngIf="project.status =='rejected'">
+
+            <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+
+
+
+
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+
+        </div> -->
+
+        <div *ngFor="let project of expiredJobs ">
+          <div *ngIf="project.status =='prePayment'">
+
+    
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+
+                  </div>
+
+                  <div *ngIf="project.status=='prePayment'" class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+
+
+
+
+                </div>
+
+              </div>
+
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot prepayment"></span> 
+                      معلقة
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+            
+
+          </div>
+
+
+          <div *ngIf="project.status =='active'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+                  </div>
+
+                </div>
+
+                <div class="custom-stepper">
+                  <div class="rpp-stepper">
+
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                        <span class="rpp-stepper-item-content">1</span>
+                        <div class="step-title-custom">انشاء الطلب</div>
+                      </div>
+                    </a>
+
+                    <div class="rpp-stepper-divider"></div>
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">2</span>
+                        <div class="step-title-custom">قبول الكاتب</div>
+                      </div>
+                    </a>
+                    <div class="rpp-stepper-divider"></div>
+
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">3</span>
+                        <div class="step-title-custom">قيد التنفيذ</div>
+                      </div>
+                    </a>
+                    <div class="rpp-stepper-divider"></div>
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">4</span>
+                        <div class="step-title-custom">المراجعة</div>
+                      </div>
+                    </a>
+
+
+                    <div class="rpp-stepper-divider"></div>
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">5</span>
+                        <div class="step-title-custom">انتهاء المشروع</div>
+                      </div>
+                    </a>
+
+                  </div>
+                </div>
+
+
+                <div>
+                  <button (click)="showArchiveDialog(project)" type="button"
+                    class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot active"></span> 
+                      نشط
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+                  <!-- <div class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div> -->
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+
+          <div *ngIf="project.status =='pending'">
+
+
+            <!-- client part -->
+            <!-- <div>
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot pending"></span> 
+                      عروض الكتاب
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+          <div *ngIf="project.status =='inprogress'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot inprogress"></span> 
+                      قيد التنفيذ
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div *ngIf="project.status =='reviewing'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot reviewing"></span> 
+                      بانتظار الاعتماد 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="project.status =='rejected'">
+
+            <!-- client part -->
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+
+
+
+
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot rejected"></span> 
+                      مرفوضة 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          معلقة
+        </ng-template>
+        <div [ngClass]="prePaymentStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of allJobsAdmin ">
+          <div *ngIf="project.status =='prePayment'">
+
+            <!-- client part -->
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+
+                  </div>
+
+                  <div *ngIf="project.status=='prePayment'" class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+
+
+                </div>
+
+              </div>
+
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot prepayment"></span> 
+                      معلقة
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          نشطة
+        </ng-template>
+        <div [ngClass]="activeStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of allJobsAdmin ">
+
+          <div *ngIf="project.status =='active'">
+            <!-- <h1>{{project | json}}</h1> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot active"></span> 
+                      نشط
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+                  <!-- <div class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div> -->
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+            
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+                  </div>
+
+
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+
+
+
+
+          </div>
+
+        </div>
+
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          عروض الكتاب
+        </ng-template>
+        <div [ngClass]="pendingStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of allJobsAdmin ">
+          <div *ngIf="project.status =='pending'">
+
+
+            <!-- client part -->
+            <!-- <div>
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot pending"></span> 
+                      عروض الكتاب
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+        </div>
+
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          قيد التنفيذ
+        </ng-template>
+        <div [ngClass]="inprogressStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of allJobsAdmin ">
+          <div *ngIf="project.status =='inprogress'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot inprogress"></span> 
+                      قيد التنفيذ
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          بانتظار الاعتماد
+        </ng-template>
+        <div [ngClass]="reviewingStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of allJobsAdmin ">
+          <div *ngIf="project.status =='reviewing'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot reviewing"></span> 
+                      بانتظار الاعتماد 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          مرفوضة
+        </ng-template>
+        <div [ngClass]="rejectedStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of allJobsAdmin ">
+          <div *ngIf="project.status =='rejected'">
+
+            <!-- client part -->
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+
+
+
+
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot rejected"></span> 
+                      مرفوضة 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </tab>
+      <tab>
+        <ng-template tabHeading>
+          مكتملة
+        </ng-template>
+        <div [ngClass]="completedStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of allJobsAdmin ">
+          <div *ngIf="project.status =='completed'">
+
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div *ngIf="project.status=='completed'" class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+
+                </div>
+              </div>
+            </div> -->
+
+
+
+            
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot completed"></span> 
+                      مكتملة
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+        </div>
+
+      </tab>
+
+      <tab>
+        <ng-template tabHeading>
+          متأخرة
+        </ng-template>
+        <div [ngClass]="expiredStatusArray.length==0? 'd-block' : 'd-none'" class="container">
+          <div class="text-center noProjectsMessage" style="margin-top: 50px;">
+            <fa-icon [icon]="faFolderOpen"></fa-icon>
+            <h4>لا يوجد مشاريع</h4>
+          </div>
+
+        </div>
+        <div *ngFor="let project of expiredJobs ">
+          <div *ngIf="project.status =='prePayment'">
+
+    
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+
+                  </div>
+
+                  <div *ngIf="project.status=='prePayment'" class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+
+
+
+
+                </div>
+
+              </div>
+
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot expired"></span> 
+                      معلقة
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+            
+
+          </div>
+
+
+          <div *ngIf="project.status =='active'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+
+
+
+
+                  </div>
+
+                </div>
+
+                <div class="custom-stepper">
+                  <div class="rpp-stepper">
+
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                        <span class="rpp-stepper-item-content">1</span>
+                        <div class="step-title-custom">انشاء الطلب</div>
+                      </div>
+                    </a>
+
+                    <div class="rpp-stepper-divider"></div>
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">2</span>
+                        <div class="step-title-custom">قبول الكاتب</div>
+                      </div>
+                    </a>
+                    <div class="rpp-stepper-divider"></div>
+
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">3</span>
+                        <div class="step-title-custom">قيد التنفيذ</div>
+                      </div>
+                    </a>
+                    <div class="rpp-stepper-divider"></div>
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">4</span>
+                        <div class="step-title-custom">المراجعة</div>
+                      </div>
+                    </a>
+
+
+                    <div class="rpp-stepper-divider"></div>
+                    <a class="stepper-link">
+                      <div class="rpp-stepper-item rpp-stepper-item-pending">
+                        <span class="rpp-stepper-item-content">5</span>
+                        <div class="step-title-custom">انتهاء المشروع</div>
+                      </div>
+                    </a>
+
+                  </div>
+                </div>
+
+
+                <div>
+                  <button (click)="showArchiveDialog(project)" type="button"
+                    class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot expired"></span> 
+                      نشط
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+                  <!-- <div class="custom-stepper">
+                    <div class="rpp-stepper">
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+
+                    </div>
+                  </div> -->
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+
+          <div *ngIf="project.status =='pending'">
+
+
+            <!-- client part -->
+            <!-- <div>
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot expired"></span> 
+                      عروض الكتاب
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+          <div *ngIf="project.status =='inprogress'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot expired"></span> 
+                      قيد التنفيذ
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+          <div *ngIf="project.status =='reviewing'">
+
+            <!-- client part -->
+            <!-- <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot expired"></span> 
+                      بانتظار الاعتماد 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <div *ngIf="project.status =='rejected'">
+
+            <!-- client part -->
+            <!-- <div>
+
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project.projectTitle}}</a></h6>
+                  </div>
+                  <div class="custom-stepper">
+                    <div class="rpp-stepper">
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">1</span>
+                          <div class="step-title-custom">انشاء الطلب</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item" ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">2</span>
+                          <div class="step-title-custom">قبول الكاتب</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item " ngClass="rpp-stepper-item-completed">
+                          <span class="rpp-stepper-item-content">3</span>
+                          <div class="step-title-custom">قيد التنفيذ</div>
+                        </div>
+                      </a>
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">4</span>
+                          <div class="step-title-custom">المراجعة</div>
+                        </div>
+                      </a>
+
+
+                      <div class="rpp-stepper-divider"></div>
+                      <a class="stepper-link">
+                        <div class="rpp-stepper-item rpp-stepper-item-pending">
+                          <span class="rpp-stepper-item-content">5</span>
+                          <div class="step-title-custom">انتهاء المشروع</div>
+                        </div>
+                      </a>
+                    </div>
+
+
+
+
+                  </div>
+
+
+                  <div>
+                    <button (click)="showArchiveDialog(project)" type="button"
+                      class="btn btn-success float-left repay-btn auto-width-btn">أرشفة</button>
+                  </div>
+                </div>
+              </div>
+
+            </div> -->
+
+            <div>
+
+              <div class="card project-item">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between">
+                    <h6><a class="project-title" style="cursor: pointer;"
+                        (click)="openProject(project)">{{project?.projectTitle}}</a></h6>
+
+                      <div class="d-flex">
+                        <h6 class="project-cost">
+                          {{project?.totalCost}} ر.س
+                        </h6>
+                        <h6 class="reg-font mt5">
+                          {{project?.createdAt | date }}
+                        </h6>
+                      </div>
+
+
+                  </div>
+                  <h6 class="client-name">{{project.firstName}} {{project.lastName}}</h6>
+                  <hr/>
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <span class="dot expired"></span> 
+                      مرفوضة 
+                    </div>
+                    <div>
+                      <button (click)="showArchiveDialog(project)" type="button"
+                        class="btn btn-success auto-width-btn admin-btn">أرشفة</button>
+                    </div>
+
+                  </div>
+                  
+     
+
+
+
+                  
+                </div>
+              </div>
+            </div>
+
+
+
+          </div>
+
+
+
+        </div>
+
+
+
+      </tab>
+    </tabset>
+
+
+  </div>
+
+
+  <div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>  
+
+  <div *ngIf="archieveMode" class="modal2 custom-modal custom-modal22" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">أرشفة المشروع </h5>
+          <button (click)="closeArchiveDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p15 text-right">
+  
+  
+  
+          <div class="d-flex">
+  
+            <button (click)="closeArchiveDialog()" style="margin-left: 10px;" type="button"
+              class="btn btn-success float-right auto-width-btn admin-btn">
+              <!-- <fa-icon class="ml5" [icon]="faCheck"></fa-icon> -->
+              إلغاء
+  
+            </button>
+            <button (click)="archiveProject()" type="button" style="margin-left: 10px;"
+              class="btn btn-success float-right auto-width-btn admin-btn">
+              <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+              تأكيد الأرشفة
+            </button>
+  
+          </div>
+          <p *ngIf="deleteSuccess">تم نقل المشروع الى الارشيف</p>
+          <p *ngIf="deleteFail">حدث خطأ اثناء نقل المشروع الى الارشيف</p>
+  
+        </div>
+      </div>
+    </div>
+  </div> 

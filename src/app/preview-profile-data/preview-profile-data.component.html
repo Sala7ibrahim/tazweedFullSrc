@@ -1,0 +1,85 @@
+<app-admin-header></app-admin-header>
+<div class="container">
+  <!-- <h1>{{selectedUser|json}}</h1> -->
+  <!-- <h1>{{selectedUser|json}}</h1>
+<h1>user image {{selectedUserImage}}</h1> -->
+  <div class="project-item mt30">
+    <div class="card-body">
+      <img *ngIf="selectedUserImage!='default'" alt="User Image" class="userProfileImage" [src]="selectedUserImage" />
+      <!-- <img *ngIf="selectedUserImage!=null"  class="userProfileImage" [src]="selectedUserImage" /> -->
+      <img class="userProfileImage" *ngIf="selectedUserImage=='default'" src="../../assets/images/profile/avatar.png" />
+      <h1 class="project-title mb0">{{selectedUser.firstName}} {{selectedUser.lastName}}</h1>
+      <span *ngIf="selectedUser.customerType=='partner'" class="acc-type">كاتب</span>
+      <span *ngIf="selectedUser.customerType=='client'" class="acc-type">عميل</span>
+      <ngb-rating max="5" [readonly]="true" [rate]="selectedUser.ratingAverage"></ngb-rating>
+      <h4>{{selectedUser.email}}</h4>
+      <h6>
+        <fa-icon class="ml5 coloredIcon" [icon]="faFolderOpen"></fa-icon> عدد المشاريع المكتملة <span
+          class="jobCount green">{{selectedUser.numOfCompletedJobs}}</span>
+      </h6>
+      <h6>
+        <fa-icon class="ml5 coloredIcon" [icon]="faFolderOpen"></fa-icon> عدد المشاريع المرفوضة <span
+          class="jobCount red">{{selectedUser.numOfRejectedJobs}}</span>
+      </h6>
+      <div *ngIf="selectedUser.customerType=='partner'" class="data-box">
+        <h6>نبذة عن الكتابات</h6>
+        <quill-editor readOnly="true"   [(ngModel)]="selectedUser.writingAbility" [styles]="{height: '200px'}"></quill-editor>
+
+      </div>
+      <div *ngIf="selectedUser.customerType=='partner'" class="data-box">
+        <h6>نبذة عن المهارات البحثية</h6>
+        <quill-editor readOnly="true"   [(ngModel)]="selectedUser.searchingAbility" [styles]="{height: '200px'}"></quill-editor>
+
+      </div>
+
+      
+
+      <div class="data-box">
+        <h5 *ngIf="selectedUser.customerType=='partner'">نبذة عن الكاتب </h5>
+        <h5 *ngIf="selectedUser.customerType=='client'">نبذة عن العميل </h5>
+        <p>{{selectedUser.briefOfWriter}}</p>
+      </div>
+      <div class="data-box">
+        <h5>مجالات الاهتمام </h5>
+        <ul class="tags d-flex">
+          <li class="tag-item" *ngFor="let tag of selectedUser.fieldsOfInterest">{{tag}}</li>
+        </ul>
+      </div>
+
+
+
+
+      <!-- <h4>{{selectedUser.ratingAverage}}</h4> -->
+
+    </div>
+  </div>
+
+  <div class="d-flex d-flex justify-content-center">
+    <div style="margin:5px" *ngIf="selectedUser.status=='active'">
+      <span class="dots green"></span> مفعل
+    </div>
+    <div style="margin:5px" *ngIf="selectedUser.status=='pending'">
+      <span class="dots red"></span>معطل
+    </div>
+
+    <button (click)="activateAccount(selectedUser._id)" style="margin-left: 10px;"
+      *ngIf="selectedUser.status=='pending'" type="button" class="btn btn-success  auto-width-btn admin-btn">
+      <fa-icon class="ml5" [icon]="faCheck"></fa-icon>
+      تفعيل الحساب
+    </button>
+    <button (click)="deActivateAccount(selectedUser._id)" style="margin-left: 10px;"
+      *ngIf="selectedUser.status=='active'" type="button"
+      class="btn btn-success admin-danger-btn  auto-width-btn admin-btn">
+      <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+      تعطيل الحساب
+    </button>
+    <button routerLink="/dashboard" type="button"
+      class="btn btn-success   auto-width-btn admin-btn">
+      <fa-icon class="ml5" [icon]="faThList"></fa-icon>
+      العودة للوحة التحكم
+    </button>
+
+    
+  </div>
+
+</div>

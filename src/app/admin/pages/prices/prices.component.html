@@ -1,0 +1,94 @@
+<div class="main-content">
+
+
+<table class="table table-bordered">
+
+
+    <thead>
+      <tr>
+        <th scope="col">الاسم</th>
+        <th scope="col">عدد الحروف</th>
+        <th scope="col">التكلفة</th>
+        <th scope="col">اليوم الواحد</th>
+        <th scope="col">يومين</th>
+        <th scope="col">ثلاثة ايام</th>
+        <th *ngIf="takeActionsPrivilage"></th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let config of projectConfig">
+        <td>{{config.name}}</td>
+        <td>
+          <input type="number" [value]="config.size" class="form-control edit-text" #size />
+        </td>
+        <td>
+          <input type="number" [value]="config.amount" class="form-control edit-text" #amount />
+        </td>
+        <td>
+          <input type="number" [value]="config.day1" class="form-control edit-text" #day1 />
+        </td>
+        <td>
+          <input type="number" [value]="config.day2" class="form-control edit-text" #day2 />
+        </td>
+        <td>
+          <input type="number" [value]="config.day3" class="form-control edit-text" #day3 />
+        </td>
+        <td *ngIf="takeActionsPrivilage" class="text-center">
+          <button (click)="editJobConfig(size,amount,day1,day2,day3,config)" type="button"
+            class="btn btn-success auto-width-btn admin-btn">
+            <fa-icon class="ml5" [icon]="faCheck"></fa-icon>
+            تعديل
+          </button>
+        </td>
+
+
+      </tr>
+
+
+
+    </tbody>
+  </table>
+    <div *ngIf="showEditSuccess" class="modal2 custom-modal" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">تعديل الاسعار</h5>
+              <button (click)="closeSuccessDlg()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>تم تعديل الاسعار بنجاح</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  <div *ngIf="showEditFail" class="modal2 custom-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">تعديل الاسعار</h5>
+          <button (click)="closeFailDlg()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>خطأ أثناء تعديل الاسعار</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+</div>

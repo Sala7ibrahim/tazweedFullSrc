@@ -1,0 +1,10 @@
+<div  class="text-center success-project" style="margin-top: 50px;box-shadow: none;"> 
+    <fa-icon [icon]="faCheckCircle"></fa-icon>
+    <h1>تم الانتهاء من المشروع!</h1>
+    <p>شكرا لاستخدامك منصة تزويد.. </p>
+    <div class="d-flex justify-content-center">
+        <button routerLink="/myProjects" type="button" class="btn btn-success generalBtnStyle add-project-submit">انتقل إلى صفحة المشاريع </button>
+        <button style="margin: 0 30px;" (click)="logOut()" type="button" class="btn btn-success generalBtnStyle add-project-submit nobg-btn">الخروج من تزويد <fa-icon [icon]="faSignOutAlt"></fa-icon></button>
+    </div>
+  </div> 
+  <app-footer-inner></app-footer-inner>

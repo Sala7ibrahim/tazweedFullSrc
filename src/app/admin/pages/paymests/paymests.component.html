@@ -1,0 +1,186 @@
+<div class="main-content">
+
+
+<div class="unpaidbalance">
+    <div class="profiles-data admin-table-container">
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">اسم الكاتب</th>
+            <th scope="col">الرصيد</th>
+            <th scope="col">الحسم</th>
+            <th scope="col">المستحقات</th>
+            <th *ngIf="paymentActions" scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let balance of unpaidBalance">
+            <td>
+              <a style="cursor: pointer;" (click)="showPaymentHistoryDialog(balance._id?.partnerId)">
+             {{balance._id?.firstName}} {{balance._id?.lastName}}
+              </a>
+             
+            </td>
+            <td>{{math.round(balance.totalBalance)}} ريال</td>
+            <td>{{balance.totalWithdrawnBalance}} ريال</td>
+            <td>{{math.round(balance.totalBalance) - balance.totalWithdrawnBalance}} ريال</td>
+
+            <!-- math.subtract(x, y) -->
+            <td *ngIf="paymentActions" class="text-center">
+              <button type="button" (click)="showPayDialoge(balance)"
+                class="btn btn-success  auto-width-btn admin-btn">دفع</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+     <!-- pay dialog -->
+     <div *ngIf="showPayDialog" class="modal2 custom-modal custom-modal22 admin-dlg" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">الموافقة على الدفع</h5>
+              <button (click)="closePayDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body text-center">
+              <button (click)="payForPartner(itemToPay._id.partnerId)" type="button"
+                class="btn btn-success admin-danger-btn float-right auto-width-btn admin-btn">
+                ادفع
+              </button>
+              <p *ngIf="showPaySuccess">تم الدفع بنجاح</p>
+              <p *ngIf="showPayFail">خطأ فى عملية الدفع</p>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+        <!-- payment history dialog -->
+     <div *ngIf="showPayHistoryDialog" class="modal2 custom-modal custom-modal22  fitDialog" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">تاريخ المدفوعات</h5>
+            <button (click)="closePaymentHistoryDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <!-- {{selectedPaymenthistory | json}} -->
+
+            <div class="table-dialog-container">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <!-- <th scope="col">الرصيد</th>
+                    <th scope="col">الحسم</th>
+                    <th scope="col">المستحقات</th> -->
+                    <th scope="col">كود المشروع</th>
+                    <th scope="col">تاريخ الاستحقاق</th>
+                    <th scope="col">اجمالى تكلفة المشروع</th>
+                    <th scope="col">المبلغ المستحق</th>
+                    <th scope="col">الحالة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let payHistory of selectedPaymenthistory">
+                    <!-- <td>{{math.round(balance.totalBalance)}} ريال</td>
+                    <td>{{balance.totalWithdrawnBalance}} ريال</td>
+                    <td>{{math.round(balance.totalBalance) - balance.totalWithdrawnBalance}} ريال</td> -->
+                    <td>
+                      <a style="cursor: pointer;" (click)="showProjectDetailsDialoge(payHistory?.jobId)">
+                        {{payHistory?.jobId}}
+                      </a>
+                      
+                     
+                    </td>
+                    <td>{{payHistory?.createAt |date}}</td>
+                    <td>{{math.round(payHistory?.amount)}}</td>
+                    <td>{{math.round(payHistory?.balance)}}</td>
+                    <td *ngIf="payHistory?.status=='unpaid'">
+                      غير مدفوع
+                    </td>
+                    <td *ngIf="payHistory?.status=='paid'">
+                       مدفوع
+                    </td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+           
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div *ngIf="projectDetailsMode"  class="modal2 custom-modal custom-modal22  project-details-dialog" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">تفاصيل المشروع </h5>
+            <!-- (click)="showProjectDetailsDialoge()" -->
+            <button (click)="closeProjectDetailsDialoge()" type="button" class="close" data-dismiss="modal"
+              aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- <h1>{{projectToShow | json}}</h1> -->
+          <div class="modal-body p15 text-right">
+            <div class="cupon-row">
+              <h6 class="cupon-title">اسم المشروع</h6>
+              <h5 class="cupon-value">
+                <a style="cursor: pointer;" (click)="openProject(projectToShow)">
+                  {{projectToShow?.projectTitle}}
+                </a>
+                
+              </h5>
+              <hr />
+            </div>
+            <div class="cupon-row">
+              <h6 class="cupon-title">تكلفة المشروع</h6>
+              <h5 class="cupon-value">{{projectToShow?.totalCost}}</h5>
+              <hr />
+            </div>
+            <div class="cupon-row">
+              <h6 class="cupon-title">اسم العميل</h6>
+              <h5 class="cupon-value">{{projectToShow?.firstName}} {{projectToShow?.lastName}}</h5>
+              <hr />
+            </div>
+        
+            <div class="cupon-row">
+              <h6 class="cupon-title">تاريخ الانشاء</h6>
+              <h5 class="cupon-value">{{projectToShow?.createdAt | date}}</h5>
+              <hr />
+            </div>
+            <div class="cupon-row">
+              <h6 class="cupon-title">تاريخ التسليم</h6>
+              <h5 class="cupon-value">{{projectToShow?.completedDate | date}}</h5>
+              <hr />
+            </div>
+            
+            
+  
+          </div>
+        </div>
+      </div>
+    </div>
+  
+
+
+  <div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+</div>

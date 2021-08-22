@@ -1,0 +1,232 @@
+<div class="main-content p30">
+
+
+<div style="margin-bottom: 10px;">
+  <button (click)="showAddAdminForm()" type="button" class="btn btn-success  auto-width-btn blue-btn"><span
+      style="padding-left: 5px;">+</span>إضافة أدمن</button>
+
+</div>
+ <div class="profiles-data">
+<!-- <h1>all admins {{allAdmins | json}}</h1> -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">اسم المستخدم</th>
+        <th scope="col">البلد</th>
+        <th scope="col">البريد الالكترونى</th>
+        <th scope="col">الدور الوظيفى</th>
+        <th scope="col"></th>
+        <!-- <th scope="col">الرصيد</th>
+        <th scope="col">الحسم</th>
+        <th scope="col">المستحقات</th> -->
+        <!-- <th *ngIf="paymentActions" scope="col"></th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let admin of allAdmins">
+        <td>
+          {{admin.firstName}} {{admin.lastName}}
+        </td>
+        <td>{{admin.country}} </td>
+        <td>{{admin.email}} </td>
+        <td *ngIf="!admin.role">
+          admin
+        </td>
+        <td *ngIf="admin.role">
+          {{admin.role}} 
+        </td>
+        <td>
+          <button  (click)="showDeleteUserDialog(admin)" type="button"
+              class="btn btn-success float-left repay-btn auto-width-btn">حذف</button>
+        </td>
+        <!-- <td>
+          <a style="cursor: pointer;" (click)="showPaymentHistoryDialog(balance._id?.partnerId)">
+         {{balance._id?.firstName}} {{balance._id?.lastName}}
+          </a>
+         
+        </td> -->
+        <!-- <td>{{math.round(balance.totalBalance)}} ريال</td>
+        <td>{{balance.totalWithdrawnBalance}} ريال</td>
+        <td>{{math.round(balance.totalBalance) - balance.totalWithdrawnBalance}} ريال</td> -->
+
+        <!-- math.subtract(x, y) -->
+        <!-- <td *ngIf="paymentActions" class="text-center">
+          <button type="button" (click)="showPayDialoge(balance)"
+            class="btn btn-success  auto-width-btn admin-btn">دفع</button>
+        </td> -->
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<form *ngIf="showFormSubmit && addMode" (keydown.enter)="$event.preventDefault()" class="col-lg-6 col-md-6 col-sm-12 col-12"
+[(formGroup)]="registerForm" (ngSubmit)="register()">
+<div class="row">
+  <div class="col-lg-6 col-md-6 col-12">
+    <div class="form-group">
+      <input type="text" name="firstName" class="form-control" formControlName="firstName"
+        placeholder="الاسم الاول" />
+      <span class="error-help"
+        *ngIf="!registerForm.get('firstName').valid && registerForm.get('firstName').touched">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        ادخل الاسم
+        الاول
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-6 col-md-6 col-12">
+    <div class="form-group">
+      <input type="text" name="lastName" class="form-control" formControlName="lastName"
+        placeholder="اسم العائلة" />
+      <span class="error-help"
+        *ngIf="!registerForm.get('lastName').valid && registerForm.get('lastName').touched">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        ادخل اسم
+        العائلة
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-12">
+    <div class="form-group">
+      <input type="email" email name="email" class="form-control" formControlName="email"
+        placeholder="البريد الالكترونى">
+      <span class="help-block error-help"
+        *ngIf="!registerForm.get('email').valid && registerForm.get('email').touched">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        ادخل
+        البريد الالكترونى
+      </span>
+    </div>
+  </div>
+
+  <div class="col-lg-12 col-md-12 col-12">
+    <div class="form-group">
+      <select id="role" class="form-control" formControlName="role">
+        <option disabled value="disabled">نوع الصلاحية</option>
+        <option value="manager">مدير</option>
+        <option value="supervisor">مشرف</option>
+        <option value="admin">أدمن</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="col-lg-12 col-md-12 col-12">
+    <div class="form-group">
+
+      <select id="country" class="form-control" [ngClass]="notSelected?'error':''" formControlName="country">
+        <option value="0" disabled>اختار البلد</option>
+        <option [value]="country?.nativeName" *ngFor="let country of allCountries">{{country?.nativeName}}</option>
+        <!-- <option>السعودية</option> -->
+      </select>
+      <span class="help-block error-help"
+        *ngIf="!registerForm.get('country').valid">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        اختار البلد
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-12">
+    <div class="form-group">
+      <input type="text" name="userName" class="form-control" formControlName="userName"
+        placeholder="اسم المستخدم (مثال Nasir)">
+      <span class="help-block error-help"
+        *ngIf="!registerForm.get('userName').valid && registerForm.get('userName').touched">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        ادخل
+        اسم المستخدم
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-12">
+    <div class="form-group relative">
+      <input id="password" type="password" name="password" class="form-control" formControlName="password"
+        placeholder="كلمة المرور">
+      <span class="showHidePassword" *ngIf="showPasswordIcon" (click)="showPassword('password')">
+        <fa-icon [icon]="faEye"></fa-icon>
+      </span>
+      <span class="showHidePassword" *ngIf="hidePasswordIcon" (click)="hidePassword('password')">
+        <fa-icon [icon]="faEyeSlash"></fa-icon>
+      </span>
+      <span class="help-block error-help"
+        *ngIf="!registerForm.get('password').valid && registerForm.get('password').touched">
+        <fa-icon [icon]="faExclamationCircle"></fa-icon>
+        password must be at
+        least 8 characters long
+      </span>
+    </div>
+
+  </div>
+  <div class="col-lg-12 col-md-12 col-12">
+    <div class="clearfix text-center mb10">
+      <button [disabled]="!registerForm.valid" class="btn btn-success" type="submit">أنشئ حسابك الجديد</button>
+    </div>
+  </div>
+
+</div>
+
+</form>
+
+
+<div *ngIf="showFailMessage" class="text-center fails stickyMessage ">
+  <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+  <h2 *ngIf="errorDetails =='This email is used'">تم التسجيل من قبل باستخدام هذا البريد الالكترونى</h2>
+  <h2 *ngIf="errorDetails !='This email is used'">{{errorDetails}}</h2>
+</div>
+
+
+<div *ngIf="showLoader" class="loader">
+  <div class="cssload-container">
+    <div class="cssload-speeding-wheel"></div>
+  </div>
+</div>
+
+
+<div class="text-center success-project" *ngIf="showSuccessMessage">
+  <fa-icon [icon]="faCheckCircle"></fa-icon>
+  <p>
+    نجحت في التسجيل، وسيصلك إيميل لتفعيل حسابك. (أحيانا يختبئ في السبام)
+    </p>
+</div>
+
+
+
+
+<div *ngIf="deleteUserMode" class="modal2 custom-modal custom-modal22" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">حذف الحساب </h5>
+        <button (click)="closeDeleteUserDialog()" type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p15 text-right">
+
+        <!-- <h1>{{userToDelete | json}}</h1> -->
+        <div class="d-flex">
+
+          <button (click)="closeDeleteUserDialog()" style="margin-left: 10px;" type="button"
+            class="btn btn-success float-right auto-width-btn admin-btn">
+            <!-- <fa-icon class="ml5" [icon]="faCheck"></fa-icon> -->
+            إلغاء
+
+          </button>
+          <button (click)="deleteAdminProfile()" type="button" style="margin-left: 10px;"
+            class="btn btn-success float-right auto-width-btn admin-btn">
+            <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+            سيتم حذف بيانات الحساب بالكامل
+          </button>
+
+        </div>
+        <p *ngIf="deleteSuccess">تم حذف الحساب </p>
+        <p *ngIf="deleteFail">حدث خطأ اثناء حذف الحساب </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>

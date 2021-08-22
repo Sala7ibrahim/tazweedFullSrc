@@ -1,0 +1,152 @@
+<app-after-login-header></app-after-login-header>
+
+<div *ngIf="showNoProjectsContainer && showProjects" class="container" style="margin-top:150px;">
+  <div class="text-center noProjectsMessage">
+    <fa-icon [icon]="faFolderOpen"></fa-icon>
+    <h4>لا يوجد مشاريع حاليا</h4>
+  </div>
+
+</div>
+
+
+<div *ngIf="showProjects">
+
+
+  <div *ngIf="showProjectsContainer" class="container" style="margin-top:30px;">
+    <div class="row">
+      <!-- right side menu -->
+      <div class="col-lg-4 col-md-4 col-12">
+        <div class="right-side-caret">
+          <h5 class="widget">محتويات السلة</h5>
+          <!-- filter block -->
+          <div class="caret_total d-flex justify-content-between">
+
+            <h6 class="caret-total-title">عدد المشاريع</h6>
+            <h6 class="caret-total-value">{{projectsCount}}</h6>
+          </div>
+          <hr>
+          <!-- <div class="caret_total d-flex justify-content-between">
+
+            <h6 class="caret-total-title">التكلفة</h6>
+            <h6 class="caret-total-value">{{totalCost}} ر.س</h6>
+          </div> -->
+          <!-- <div class="caret_total d-flex justify-content-between">
+
+            <h6 class="caret-total-title">الأجر الإضافي</h6>
+            <h6 class="caret-total-value">{{allAdditionalCost}} ر.س</h6>
+          </div> -->
+          <div class="caret_total final d-flex justify-content-between">
+
+            <h6 class="caret-total-title">السعر الكلي</h6>
+            <!-- {{allAdditionalCost}} -->
+            <h6 class="caret-total-value">{{allCost}} ر.س</h6>
+          </div>
+          <div class="">
+
+            <button (click)="repayAllProject()" type="button" class="btn btn-success">
+              ادفع الآن
+            </button>
+          </div>
+
+        </div>
+      </div>
+      <!-- projects start -->
+      <div class="col-lg-8 col-md-8 col-12">
+        <h6>عدد المشاريع في السلة ({{projectsCount}})</h6>
+        <div *ngFor="let project of allCartProjects ">
+          <div  class="card project-item">
+            <div class="card-body">
+              <!-- <h1>{{project | json}}</h1> -->
+              <div class="d-flex justify-content-between ">
+                <h5 class="project-title m0">{{project.projectTitle}}</h5>
+                <div class="project-details-btn reg-font">
+                  <button (click)="openProject(project)" type="button" class="btn">تفاصيل المشروع<fa-icon
+                      [icon]="faArrowLeft"></fa-icon></button>
+                </div>
+              </div>
+              <div class="d-flex">
+                <h6> {{project.totalCost}} ر.س</h6>
+                <h6 *ngIf="project.hasPromoCode==true" class="promo-exist"><s>{{project.amount + project.addtionalAmount}} ر.س</s></h6>
+              </div>
+              <hr />
+              <div class="d-flex justify-content-end">
+              
+
+                  <button (click)="showDeleteprojectDialog(project)" type="button" class="btn btn-success generalBtnStyle del-project ">
+                      <fa-icon [icon]="faTrashAlt" style="padding-left: 5px;"></fa-icon>
+                    حذف المشروع
+                  </button>
+                  <button (click)="repayProject(project)"  type="button" class="btn btn-success nobg-btn auto-width-btn mr20">
+                    الدفع الفردي للمشروع
+                  </button>
+              </div>
+ 
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- *ngIf="showLoader" -->
+<div *ngIf="showLoaderMaster" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+<app-footer-inner></app-footer-inner>
+
+
+<div *ngIf="deleteprojectMode" class="modal2 custom-modal custom-modal22" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">
+          <fa-icon [icon]="faTrashAlt" style="padding-left: 5px;"></fa-icon>
+          حذف مشروع 
+        </h5>
+        <button (click)="closeDeleteprojectDialog()" type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body p15 text-right">
+<p class="mt0 reg-font">
+  المشروع سيُحذف للأبد!
+</p>
+        <!-- <h1>{{projectToDelete | json}}</h1> -->
+        <div class="d-flex">
+          <button (click)="deleteProject()" type="button" style="margin-left: 10px;"
+          class="btn btn-success float-right auto-width-btn admin-btn danger-btn">
+          حذف المشروع
+        </button>
+          <button (click)="closeDeleteprojectDialog()" style="margin-left: 10px;" type="button"
+            class="btn btn-success float-right auto-width-btn admin-btn nobg-btn gray-btn">
+            <!-- <fa-icon class="ml5" [icon]="faCheck"></fa-icon> -->
+            إلغاء الأمر
+
+          </button>
+     
+
+        </div>
+        <p *ngIf="deleteSuccess">تم حذف المشروع </p>
+        <p *ngIf="deleteFail">حدث خطأ اثناء حذف المشروع </p>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div *ngIf="showLoader" class="loader loaderMaster">
+  <div class="cssload-container">
+    <div class="cssload-speeding-wheel"></div>
+  </div>
+</div>

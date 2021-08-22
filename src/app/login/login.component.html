@@ -1,0 +1,164 @@
+<app-header></app-header>
+<div class="main-content">
+  <div class="container">
+    <div class="form-title mt0 ">
+      <h1>أهلا بعودتك! </h1>
+      <!-- <div class="anotherRegisteration" *ngIf="registerNewLine">
+      <span class="ask reg-font">ليس لديك حساب مع تزويد؟</span><a routerLink="/clientRegister">سجل كعميل</a> أو <a
+        style="margin-right: 0" routerLink="/partnerRegister">سجل ككاتب</a>
+    </div> -->
+    </div>
+    <tabset class="login-tabs">
+      <tab [active]="activeTabType=='client' ||activeTabType=='' || activeTabType==null  ? true : false "
+        heading="عميل">
+
+
+        <div class="row">
+          <form (keydown.enter)="$event.preventDefault()" class="col-lg-6 col-md-6 col-sm-12 col-12 mt20"
+            [formGroup]="loginForm" (ngSubmit)="login('client')">
+            <div class="form-group">
+              <input type="text" name="email" class="form-control" formControlName="email"
+                placeholder="البريد الالكترونى" />
+              <span class="error-help" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                من فضلك قم بادخال البريد
+                الالكترونى
+              </span>
+            </div>
+            <div class="form-group relative">
+              <input id="password" type="password" name="password" class="form-control" formControlName="password"
+                placeholder="كلمة المرور">
+              <span class="showHidePassword" *ngIf="showPasswordIcon" (click)="showPassword('password')">
+                <fa-icon [icon]="faEye"></fa-icon>
+              </span>
+              <span class="showHidePassword" *ngIf="hidePasswordIcon" (click)="hidePassword('password')">
+                <fa-icon [icon]="faEyeSlash"></fa-icon>
+              </span>
+              <span class="help-block error-help"
+                *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                password
+                must be at least 8 characters long
+              </span>
+            </div>
+            <div class="form-group  d-flex justify-content-between">
+              <div><button class="btn normal-btn" (click)="resetPassword('client')" type="button"><span>هل نسيت كلمة
+                    المرور؟</span></button></div>
+            </div>
+
+            <div class="clearfix">
+              <button class="btn btn-success login-btn-last float-right" type="submit">تسجيل الدخول</button>
+            </div>
+            <div class="anotherRegisteration" *ngIf="registerNewLine">
+              <span class="ask reg-font">ليس لديك حساب مع تزويد؟</span><a routerLink="/clientRegister"> سجل كعميل </a> <span class="m05 reg-font">أو</span>
+              <a style="margin-right: 0" routerLink="/partnerRegister">سجل ككاتب</a>
+            </div>
+
+            <div *ngIf="showLoader" class="loader">
+              <div class="cssload-container">
+                <div class="cssload-speeding-wheel"></div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+      </tab>
+      <tab [active]="activeTabType=='partner' ? true : false " heading="كاتب" id="tab1">
+
+        <div class="row">
+          <form (keydown.enter)="$event.preventDefault()" class="col-lg-6 col-md-6 col-sm-12 col-12 mt20"
+            [formGroup]="loginForm" (ngSubmit)="login('partner')">
+            <div class="form-group">
+              <input type="text" name="email" class="form-control" formControlName="email"
+                placeholder="البريد الالكترونى" />
+              <span class="error-help" *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                من فضلك قم بادخال البريد
+                الالكترونى
+              </span>
+            </div>
+            <div class="form-group relative">
+              <input id="password1" type="password" name="password" class="form-control" formControlName="password"
+                placeholder="كلمة المرور">
+              <span class="showHidePassword" *ngIf="showPasswordIcon" (click)="showPassword('password1')">
+                <fa-icon [icon]="faEye"></fa-icon>
+              </span>
+              <span class="showHidePassword" *ngIf="hidePasswordIcon" (click)="hidePassword('password1')">
+                <fa-icon [icon]="faEyeSlash"></fa-icon>
+              </span>
+              <span class="help-block error-help"
+                *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">
+                <fa-icon [icon]="faExclamationCircle"></fa-icon>
+                password
+                must be at least 8 characters long
+              </span>
+            </div>
+            <div class="form-group  d-flex justify-content-between">
+              <div><button class="btn normal-btn" (click)="resetPassword('partner')" type="button"><span>هل نسيت كلمة
+                    المرور؟</span></button></div>
+            </div>
+
+            <div class="clearfix">
+              <button class="btn btn-success login-btn-last float-right" type="submit">تسجيل الدخول</button>
+            </div>
+            <div class="anotherRegisteration" *ngIf="registerNewLine">
+              <span class="ask reg-font">ليس لديك حساب مع تزويد؟</span><a routerLink="/clientRegister"> سجل كعميل </a> <span class=" reg-font m05">أو</span>
+              <a style="margin-right: 0" routerLink="/partnerRegister">سجل ككاتب</a>
+            </div>
+
+            <div *ngIf="showLoader" class="loader">
+              <div class="cssload-container">
+                <div class="cssload-speeding-wheel"></div>
+              </div>
+            </div>
+
+          </form>
+
+        </div>
+
+      </tab>
+
+    </tabset>
+
+
+
+    <div *ngIf="checkMailMessage" class="text-center fails stickyMessage d-none d-sm-block">
+      <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+      <h1>تحتاج لتفعيل حسابك عبر الرابط المرسل لإيميلك.</h1>
+      <!-- <p> من فضلك قم بتفعيل الحساب</p> -->
+    </div>
+    <div *ngIf="showFailed" class="text-center fails stickyMessage d-none d-sm-block">
+      <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+      <h1>تعذر تسجيل الدخول </h1>
+    </div>
+    <div style="margin-top: 10px;" *ngIf="checkMailMessage" class="toast d-lg-none d-md-none d-sm-none" role="alert"
+      aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="mr-auto">تسجيل الدخول</strong>
+        <button (click)="closeErrorActiviate()" type="button" class="ml-2 mb-1 close" data-dismiss="toast"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        تحتاج لتفعيل حسابك عبر الرابط المرسل لإيميلك.
+      </div>
+    </div>
+
+    <div style="margin-top: 10px;" *ngIf="showFailed" class="toast d-lg-none d-md-none d-sm-none" role="alert"
+      aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="mr-auto">تسجيل الدخول</strong>
+        <button (click)="closeError()" type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        تعذر تسجيل الدخول.
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<app-footer></app-footer>

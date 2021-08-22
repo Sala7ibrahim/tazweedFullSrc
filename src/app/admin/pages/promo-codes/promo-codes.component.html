@@ -1,0 +1,483 @@
+<div class="main-content p30">
+
+<div class="d-flex d-flex justify-content-between cupon-header">
+    <div>
+      <h6>كوبونات التخفيض</h6>
+      <span class="gray reg-font">لعملاء تزويد</span>
+    </div>
+    <div>
+      <button (click)="showAddCuponForm()" type="button" class="btn btn-success  p520 blue-btn"><span
+          style="padding-left: 5px;">+</span>إضافة كوبون جديد</button>
+
+    </div>
+  </div>
+  <div class="profiles-data admin-table-container">
+    <table class="table table-bordered">
+      <!-- <h1>all promo codes{{allPromoCodes|json}}</h1> -->
+      <tbody>
+        <tr *ngFor="let promo of allPromoCodes">
+          <td>
+            <a (click)="openPromoCodeDialog(promo.code)" style="cursor: pointer;">
+              {{promo.code}}
+            </a>
+
+          </td>
+          <td>
+            <a (click)="openPromoCodeStatDialog(promo.code)" style="cursor: pointer;">
+              <fa-icon class="ml5" [icon]="faChartBar"></fa-icon>الإحصائيات
+            </a>
+            
+            
+          </td>
+          <td class="red">
+            <a (click)="openDeleteDialog(promo)" style="cursor: pointer;">
+
+              <fa-icon class="ml5" [icon]="faTrashAlt"></fa-icon>حذف الكوبون
+            </a>
+          </td>
+          <td class="text-center">
+            <a *ngIf="promo.status=='deactive'" (click)="activateCupon(promo)" style="cursor: pointer;">
+              <fa-icon class="faOff fs20" [icon]="faToggleOff"></fa-icon>
+            </a>
+            <a *ngIf="promo.status=='active'" (click)="deActivateCupon(promo)" style="cursor: pointer;">
+              <fa-icon class="faOn fs20" [icon]="faToggleOn"></fa-icon>
+            </a>
+          </td>
+        </tr>
+
+
+
+      </tbody>
+    </table>
+  </div>
+
+
+  
+  <div *ngIf="showAddCupon" class="modal2 custom-modal custom-modal22 cupon-dlg" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">اضافة كوبون جديد</h5>
+          <button (click)="closeAddCuponDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p15 text-right">
+          <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="addCuponForm" (ngSubmit)="addCupon()">
+
+            <div class="form-group" style="position: relative;">
+              <h6 class="blue-title">اسم الكوبون</h6>
+              <input type="text" (input)="checkCuponName($event)" placeholder="مثال k10"
+                class="form-control normal-form-control" formControlName="code" />
+
+              <div class="validityContainer">
+                <div *ngIf="showLoaderInput" id="circularG">
+                  <div id="circularG_1" class="circularG"></div>
+                  <div id="circularG_2" class="circularG"></div>
+                  <div id="circularG_3" class="circularG"></div>
+                  <div id="circularG_4" class="circularG"></div>
+                  <div id="circularG_5" class="circularG"></div>
+                  <div id="circularG_6" class="circularG"></div>
+                  <div id="circularG_7" class="circularG"></div>
+                  <div id="circularG_8" class="circularG"></div>
+                </div>
+                <fa-icon *ngIf="ValiditySuccess" class="checkValidity" [icon]="faCheckCircle"></fa-icon>
+                <fa-icon *ngIf="ValidityFail" class="checkValidity error" [icon]="faTimesCircle"></fa-icon>
+
+              </div>
+            </div>
+
+
+            <div class="form-group  d-flex justify-content-between">
+              <div>
+
+
+                <h6 class="blue-title">نوع الكوبون</h6>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input (change)="showMail()" class="custom-control-input" id="publ" type="radio" value="true"
+                    formControlName="isPublic">
+                  <label class="custom-control-label" for="publ">عام </label>
+                </div>
+
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input (change)="showMail()" class="custom-control-input" id="priv" type="radio" value="false"
+                    formControlName="isPublic">
+                  <label class="custom-control-label" for="priv">خاص </label>
+                </div>
+              </div>
+              <div *ngIf="showEmailField">
+                <h6 class="blue-title">الإيميل المخصص</h6>
+                <input type="email" class="form-control mw260" formControlName="userEmail" />
+
+              </div>
+
+            </div>
+
+            <div class="form-group  d-flex justify-content-between">
+              <div>
+
+
+                <h6 class="blue-title">نوع التخفيض</h6>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input class="custom-control-input" id="fixedVal" type="radio" value="false"
+                    formControlName="isPercentage">
+                  <label class="custom-control-label" for="fixedVal">قيمة ثابتة</label>
+                </div>
+
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input class="custom-control-input" id="ratio" type="radio" value="true"
+                    formControlName="isPercentage">
+                  <label class="custom-control-label" for="ratio">نسبة مئوية</label>
+                </div>
+              </div>
+              <div>
+                <h6 class="blue-title">المقدار</h6>
+                <input type="number" class="form-control mw260" formControlName="value" />
+
+              </div>
+
+            </div>
+            <div class="form-group">
+              <h6 class="blue-title">المنتجات المشمولة</h6>
+              <!-- <h1>{{allJobTypes|json}}</h1> -->
+
+              <div class=" d-flex justify-content-between">
+
+                <div *ngFor="let jobType of allJobTypes;let z = index" class="form-check form-check-inline">
+                  <input (change)="onCheckboxChange($event,jobType.id)" class="form-check-input" type="checkbox"
+                    [value]="jobType.id" [id]="jobType.id">
+                  <label class="form-check-label mr5" for="flexCheckDefault">
+                    {{jobType.name}}
+                  </label>
+                </div>
+              </div>
+              <!--                 
+              <input class="form-check-input" (change)="onCheckboxChange($event,smallProject)" name="smallProject"
+              type="checkbox" value="1" #smallProject id="flexCheckDefault"> -->
+
+
+
+
+
+
+
+            </div>
+            <div class="form-group">
+              <h6 class="blue-title">عدد المرات المتاحة للاستخدام للجميع</h6>
+              <input type="number" class="form-control" formControlName="numberOfUsageForUser" />
+            </div>
+            <div *ngIf="!showEmailField" class="form-group">
+              <h6 class="blue-title">عدد المرات المتاحة للاستخدام لعميل واحد</h6>
+              <input type="number" class="form-control" formControlName="numberOfUsagePerUser" />
+            </div>
+            <div class="d-flex">
+
+              <button [disabled]="!addCuponForm.valid || ValidityFail" style="margin-left: 10px;" type="submit"
+                class="btn btn-success float-right auto-width-btn admin-btn">
+                <fa-icon class="ml5" [icon]="faCheck"></fa-icon>
+                حفظ الكوبون
+              </button>
+              <button (click)="closeAddCuponDialog()" type="button" style="margin-left: 10px;"
+                class="btn btn-success admin-danger-btn float-right auto-width-btn admin-btn blue-color-btn">
+                <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+                إلغاء
+              </button>
+
+            </div>
+            <p *ngIf="addCuponSuccess">تم اضافة الكوبون بنجاح</p>
+            <p *ngIf="addCuponFail">حدث خطأ اثناء اضافة الكوبون</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showDeleteDialog" class="modal2 custom-modal custom-modal22 cupon-dlg" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">حذف كوبون </h5>
+          <button (click)="closeDeleteDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p15 text-right">
+
+
+
+          <div class="d-flex">
+
+            <button (click)="closeDeleteDialog()" style="margin-left: 10px;" type="button"
+              class="btn btn-success float-right auto-width-btn admin-btn">
+              <!-- <fa-icon class="ml5" [icon]="faCheck"></fa-icon> -->
+              إلغاء
+
+            </button>
+            <button (click)="deleteCupon()" type="button" style="margin-left: 10px;"
+              class="btn btn-success float-right auto-width-btn admin-btn">
+              <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+              حذف
+            </button>
+
+          </div>
+          <p *ngIf="deleteSuccess">تم حذف الكوبون </p>
+          <p *ngIf="deleteFail">حدث خطأ اثناء حذف الكوبون</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showOnePromoCodeDialog" class="modal2 custom-modal custom-modal22 cupon-dlg" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">تفاصيل الكوبون </h5>
+          <button (click)="closePromoCodeDialog()" type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- <h1>{{selectedPromoCode | json}}</h1> -->
+        <div class="modal-body p15 text-right">
+          <div class="cupon-row">
+            <h6 class="cupon-title">اسم الكوبون</h6>
+            <h5 class="cupon-value">{{selectedPromoCode?.code}}</h5>
+            <hr />
+          </div>
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">التخفيض</h6>
+            <h5 *ngIf="!selectedPromoCode?.isPercentage" class="cupon-value">
+              قيمة ثابتة -
+              {{selectedPromoCode?.value}}
+              ر.س
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.isPercentage" class="cupon-value">
+              نسبة مئوية -
+              {{selectedPromoCode?.value}}
+              %
+            </h5>
+            <hr />
+          </div>
+
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">المنتجات المشمولة</h6>
+            <h5 *ngIf="selectedPromoCode?.productId=='1' || selectedPromoCode?.productId=='1,1'" class="cupon-value">
+              كتابة مقالات
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='2' || selectedPromoCode?.productId=='2,2'" class="cupon-value">
+              كتابة وصف منتج
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='3' || selectedPromoCode?.productId=='3,3'" class="cupon-value">
+              تغريدات
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='1,2'||selectedPromoCode?.productId=='2,1' " class="cupon-value">
+              كتابة مقالات - كتابة وصف منتج
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='1,3'||selectedPromoCode?.productId=='3,1' " class="cupon-value">
+              كتابة مقالات - تغريدات
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='2,3'||selectedPromoCode?.productId=='3,2' " class="cupon-value">
+              كتابة وصف منتج - تغريدات
+            </h5>
+            <h5
+              *ngIf="selectedPromoCode?.productId=='1,2,3'||selectedPromoCode?.productId=='1,3,2' ||selectedPromoCode?.productId=='2,1,3' ||selectedPromoCode?.productId=='2,3,1' ||selectedPromoCode?.productId=='3,1,2' ||selectedPromoCode?.productId=='3,2,1' "
+              class="cupon-value">
+              كتابة مقالات - كتابة وصف منتج - تغريدات
+            </h5>
+            <hr />
+          </div>
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">عدد المرات المتاحة للاستخدام للجميع</h6>
+            <h5 class="cupon-value">{{selectedPromoCode?.numberOfUsageForUser}}</h5>
+            <hr />
+          </div>
+
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">عدد المرات المتاحة للاستخدام لعميل واحد</h6>
+            <h5 class="cupon-value">{{selectedPromoCode?.numberOfUsagePerUser}}</h5>
+          </div>
+
+
+
+
+
+
+
+          <!-- <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">الكود</th>
+                <th scope="col">القيمة</th>
+                <th *ngIf="selectedPromoCode.isPercentage" scope="col">نسبة مئوية</th>
+                <th *ngIf="!selectedPromoCode.isPercentage" scope="col">قيمة محددة</th>
+                <th *ngIf="!selectedPromoCode.isReused" scope="col">متاح للاستخدام مرة واحدة</th>
+                <th scope="col">متاح للاستخدام أكتر من مرة</th>
+                <th scope="col">عدد المرات المتاحة للاستخدام للجميع</th>
+                <th scope="col">عدد المرات المتاحة للاستخدام لعميل واحد</th>
+
+  
+  
+              </tr>
+            </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    {{selectedPromoCode.code}}
+                    
+                  </td>
+                  
+                  <td>
+                    {{selectedPromoCode.value}}
+                    
+                  </td>
+                  <td *ngIf="selectedPromoCode.isPercentage">
+                    +
+                  </td>
+                  <td *ngIf="!selectedPromoCode.isPercentage">
+                    +
+                  </td>
+
+                  <td *ngIf="!selectedPromoCode.isReused">
+                    +
+                  </td>
+                  <td *ngIf="selectedPromoCode.isReused">
+                    +
+                  </td>
+
+                  <td>
+                    {{selectedPromoCode.numberOfUsageForUser}}
+                  </td>
+                  
+                  <td>
+                    {{selectedPromoCode.numberOfUsagePerUser}}
+                  </td>
+
+
+
+                  
+                </tr>
+               
+  
+  
+              </tbody>
+            </table> -->
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="showPromoCodeStatisDialog" class="modal2 custom-modal custom-modal22 cupon-dlg" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">احصائيات الكوبون </h5>
+          <button (click)="closePromoCodeStatDialog()" type="button" class="close" data-dismiss="modal"
+            aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <!-- <h1>{{selectedPromoCode | json}}</h1> -->
+        <div class="modal-body p15 text-right">
+          <div class="cupon-row">
+            <h6 class="cupon-title">عدد المرات المتاحة للاستخدام للجميع</h6>
+            <h5 class="cupon-value">{{statisticsResponse?.numberOfUsageForUser}}</h5>
+            <hr />
+          </div>
+
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">عدد المرات المتاحة للاستخدام لعميل واحد</h6>
+            <h5 class="cupon-value">{{statisticsResponse?.numberOfUsagePerUser}}</h5>
+            <hr />
+          </div>
+          <div class="cupon-row">
+            <h6 class="cupon-title">اجمالى المبيعات</h6>
+            <h5 class="cupon-value">{{statisticsResponse?.totalAmountOfSales}}</h5>
+          </div>
+          <!-- <div class="cupon-row">
+            <h6 class="cupon-title">اسم الكوبون</h6>
+            <h5 class="cupon-value">{{selectedPromoCode?.code}}</h5>
+            <hr />
+          </div>
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">التخفيض</h6>
+            <h5 *ngIf="!selectedPromoCode?.isPercentage" class="cupon-value">
+              قيمة ثابتة -
+              {{selectedPromoCode?.value}}
+              ر.س
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.isPercentage" class="cupon-value">
+              نسبة مئوية -
+              {{selectedPromoCode?.value}}
+              %
+            </h5>
+            <hr />
+          </div>
+
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">المنتجات المشمولة</h6>
+            <h5 *ngIf="selectedPromoCode?.productId=='1' || selectedPromoCode?.productId=='1,1'" class="cupon-value">
+              كتابة مقالات
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='2' || selectedPromoCode?.productId=='2,2'" class="cupon-value">
+              كتابة وصف منتج
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='3' || selectedPromoCode?.productId=='3,3'" class="cupon-value">
+              تغريدات
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='1,2'||selectedPromoCode?.productId=='2,1' " class="cupon-value">
+              كتابة مقالات - كتابة وصف منتج
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='1,3'||selectedPromoCode?.productId=='3,1' " class="cupon-value">
+              كتابة مقالات - تغريدات
+            </h5>
+            <h5 *ngIf="selectedPromoCode?.productId=='2,3'||selectedPromoCode?.productId=='3,2' " class="cupon-value">
+              كتابة وصف منتج - تغريدات
+            </h5>
+            <h5
+              *ngIf="selectedPromoCode?.productId=='1,2,3'||selectedPromoCode?.productId=='1,3,2' ||selectedPromoCode?.productId=='2,1,3' ||selectedPromoCode?.productId=='2,3,1' ||selectedPromoCode?.productId=='3,1,2' ||selectedPromoCode?.productId=='3,2,1' "
+              class="cupon-value">
+              كتابة مقالات - كتابة وصف منتج - تغريدات
+            </h5>
+            <hr />
+          </div>
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">عدد المرات المتاحة للاستخدام للجميع</h6>
+            <h5 class="cupon-value">{{selectedPromoCode?.numberOfUsageForUser}}</h5>
+            <hr />
+          </div>
+
+
+          <div class="cupon-row">
+            <h6 class="cupon-title">عدد المرات المتاحة للاستخدام لعميل واحد</h6>
+            <h5 class="cupon-value">{{selectedPromoCode?.numberOfUsagePerUser}}</h5>
+          </div> -->
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+   
+
+
+</div>

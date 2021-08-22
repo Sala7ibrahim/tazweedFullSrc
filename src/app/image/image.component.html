@@ -1,0 +1,18 @@
+<div class="container">
+
+
+  <h1>upload image </h1>
+  <form (keydown.enter)="$event.preventDefault()" class="col-lg-6 col-md-6 col-sm-12 col-12 mt20"
+    [formGroup]="uploadImageForm" (ngSubmit)="uploadImage()"> 
+
+    <div class="form-group attach-container">
+    
+        <input type="file" name="attach" class="form-control attach-input" (change)="onChange($event)"
+          placeholder="رابط الصورة الشخصية">
+        <input type="text" hidden name="attach" class="form-control" formControlName="image"> 
+    
+      </div>
+      <button type="submit" class="btn btn-success">upload image</button> 
+
+  </form>
+</div>

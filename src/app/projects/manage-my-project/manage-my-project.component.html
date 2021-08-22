@@ -1,0 +1,245 @@
+<app-after-login-header></app-after-login-header>
+<div class="container">
+  <div *ngIf="showPaymentMessage" class="modal2 custom-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">تعديل بيانات المشروع</h5>
+          <button (click)="closePaymentDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>تم تعديل بيانات المشروع بنجاح</p> 
+          <p>سيتم تحويلك تلقائيا الى صفحة الدفع</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+ 
+  <div *ngIf="showPromocodeMessage" class="modal2 custom-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">بيانات الكوبون الخاص بالعميل</h5>
+          <button (click)="closePromocodeDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>تم انشاء كوبون خاص بك </p> 
+          <p>{{promocodeGenerated}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+
+  <div *ngIf="showEditSuccessMessage" class="modal2 custom-modal" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">تعديل بيانات المشروع</h5>
+          <button (click)="closeDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p>تم تعديل بيانات المشروع بنجاح</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-title">
+    <h1>تعديل المشروع</h1>
+    <!-- <h1>{{editedProjectObject|json}}</h1> -->
+  </div>
+
+  <!-- <div *ngIf="editModeWithPromoCode">
+    يوجد برومو كود
+  </div>
+  <div *ngIf="!editModeWithPromoCode">
+    لايوجد برومو كود
+  </div> -->
+  <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="editProjectForm" (ngSubmit)="editProject()">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12">
+        <div class="form-group">
+          <h6>العنوان المقترح للمقال</h6>
+          <input type="text" class="form-control" formControlName="projectTitle" />
+        </div>
+        <div class="form-group">
+          <h6>في أي مجال تحب نكتب لك؟</h6>
+          <input type="text" class="form-control" formControlName="projectField" />
+        </div>
+        <div class="form-group">
+          <h6>لديك أفكار تحب التركيز عليها؟ <span class="reg-font-2 addon">(اختياري)</span></h6>
+          <textarea type="text" class="form-control" formControlName="projectIdea"></textarea>
+        </div>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12" *ngIf="!editModeWithPromoCode">
+        <div class="form-group">
+          <h6>اختر حجم المشروع </h6>
+          <div class="d-flex">
+            <div class="radio-item-c" *ngFor="let projectConfig of projectConfig">
+              <input (change)="calculateCost()" [id]="projectConfig.id" type="radio" [value]="projectConfig.id"
+                formControlName="size">
+              <!-- <label for="projectConfig.id">{{projectConfig.name}} <br>{{projectConfig.size}} كلمة</label> -->
+
+              <label [for]="projectConfig.id">
+                <span *ngIf="projectConfig.id==1">قصير</span>
+                <span *ngIf="projectConfig.id==2">متوسط</span>
+                <span *ngIf="projectConfig.id==3">طويل</span>
+
+                <br>
+                {{projectConfig.size}} كلمة
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h6>حدد مدة التنفيذ</h6>
+          <div class="d-flex">
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="shortTime" type="radio" [value]="day1" 
+                formControlName="timePerDay">
+              <label for="shortTime">24 ساعة </label>
+            </div>
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="mediumTime" type="radio" [value]="day2" 
+                formControlName="timePerDay">
+              <label for="mediumTime">48 ساعة</label>
+            </div>
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="largeTime" type="radio" [value]="day3" 
+                formControlName="timePerDay">
+              <label for="largeTime">72 ساعة</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h6>تكلفة المشروع</h6>
+          <h5>{{projectCost}} ر.س</h5>
+        </div>
+        <div class="form-group additon">
+          <h6>الأجر الاضافى</h6>
+         <button  type="button" class="btn very-normal-btn addion_btn" (click)="addAddition()">أضف</button>
+          <input     type="number" class="form-control" formControlName="addtionalAmount"  />
+        </div>
+
+        
+
+        <div class="form-group">
+          <h6>اجمالى تكلفة المشروع ( التكلفة + الاجر الاضافى)</h6>
+          <h5>{{finalTotalCost}} ر.س</h5>
+        </div>
+        
+
+      </div>
+
+
+
+<!-- calculation with promo code -->
+
+      <div class="col-lg-6 col-md-6 col-12" *ngIf="editModeWithPromoCode">
+        <div class="form-group">
+          <h6>اختر حجم المشروع </h6>
+          <div class="d-flex">
+            <div class="radio-item-c" *ngFor="let projectConfig of projectConfig">
+              <input (change)="calculateCost()" [id]="projectConfig.id" type="radio" [value]="projectConfig.id"
+                formControlName="size">
+              <!-- <label for="projectConfig.id">{{projectConfig.name}} <br>{{projectConfig.size}} كلمة</label> -->
+
+              <label [for]="projectConfig.id">
+                <span *ngIf="projectConfig.id==1">قصير</span>
+                <span *ngIf="projectConfig.id==2">متوسط</span>
+                <span *ngIf="projectConfig.id==3">طويل</span>
+
+                <br>
+                {{projectConfig.size}} كلمة
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <h6>حدد مدة التنفيذ</h6>
+          <div class="d-flex">
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="shortTime" type="radio" [value]="day1" 
+                formControlName="timePerDay">
+              <label for="shortTime">24 ساعة </label>
+            </div>
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="mediumTime" type="radio" [value]="day2" 
+                formControlName="timePerDay">
+              <label for="mediumTime">48 ساعة</label>
+            </div>
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="largeTime" type="radio" [value]="day3" 
+                formControlName="timePerDay">
+              <label for="largeTime">72 ساعة</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <h6>تكلفة المشروع</h6>
+          <h5>{{projectCost}} ر.س</h5>
+        </div>
+        <div class="form-group additon">
+          <h6>الأجر الاضافى</h6>
+         <button  type="button" class="btn very-normal-btn addion_btn" (click)="addAddition()">أضف</button>
+          <input     type="number" class="form-control" formControlName="addtionalAmount"  />
+        </div>
+
+        
+
+        <div class="form-group">
+          <h6>اجمالى تكلفة المشروع قبل الخصم ( التكلفة + الاجر الاضافى)</h6>
+          <h5><s>{{finalTotalCost}} ر.س</s></h5>
+        </div>
+        
+        <div class="form-group">
+          <h6>اجمالى تكلفة المشروع بعد الخصم</h6>
+          <h5>{{finalCostFterPromo}} ر.س</h5>
+        </div>
+        
+      </div>
+
+
+
+    </div>
+
+
+
+    <div *ngIf="showAddJobLssThanLimit" class="modal2 custom-modal" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">اضافة مشروع</h5>
+            <button (click)="closeaddLimitDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>عذرا..  الحد الأدنى للمشروع ٥ ريالات</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center">
+      <button type="submit" class="btn btn-success auto-width-btn">حفظ التعديلات</button>
+    </div>
+
+  </form>
+</div>
+<app-footer-inner></app-footer-inner>
+<!--  -->
+<div *ngIf="showLoader"  class="loader loaderMaster">
+  <div class="cssload-container">
+    <div class="cssload-speeding-wheel"></div>
+    </div>
+</div>

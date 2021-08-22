@@ -1,0 +1,98 @@
+<div class="row ml0">
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon">
+          <fa-icon class="" [icon]="faUserAlt"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">عدد الكتاب الحاليين</h6>
+          <h6>{{numberOfPartners}}</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon">
+          <fa-icon class="blue" [icon]="faUserTie"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">عدد العملاء</h6>
+          <h6>{{numberOfClients}}</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon light-orane">
+          <fa-icon class="orange" [icon]="faUserAlt"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">الكتاب المسجلين حديثا</h6>
+          <h6>{{numberOfRecentPartners}}</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon light-purble">
+          <fa-icon class="purble" [icon]="faFolderOpen"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">عدد المشاريع المفتوحة</h6>
+          <h6>{{numberOfActiveJobs}}</h6>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showCompletedJobs" class="col-lg-4 col-md-4 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon light-green">
+          <fa-icon class="green" [icon]="faCheck"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">عدد المشاريع المنفذة</h6>
+          <h6>{{numberOfDoneJobs}}</h6>
+        </div>
+      </div>
+    </div> 
+    <div class="col-lg-4 col-md-4 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon light-yellow">
+          <fa-icon class="yellow" [icon]="faEnvelope"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">الرسائل</h6>
+          <h6>{{numberOfMessages}}</h6>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showVisitors" class="col-lg-8 col-md-8 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon">
+          <fa-icon class="blue" [icon]="faChartBar"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">عدد زوار الموقع</h6>
+          <h6>{{visitors}}</h6>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showProfits" class="col-lg-4 col-md-4 col-12">
+      <div class="admin-block d-flex">
+        <div class="admin-icon light-green">
+          <fa-icon class="green" [icon]="faHandHoldingUsd"></fa-icon>
+        </div>
+        <div>
+          <h6 class="reg-font">الارباح</h6>
+          <h6>{{math.round(profits)}}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+  
+  

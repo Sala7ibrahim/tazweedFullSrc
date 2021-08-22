@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="card project-item messanger-container">
+      <div class="card-body">
+        <!-- <h1>{{messagesStorage | json}}</h1> -->
+        <div class="messanger-header">
+          <h6>الدعم الفني (تزويد)</h6>
+        </div>
+        <hr />
+        <div class="messanger-body">
+          <div *ngFor="let message of messagesStorage">
+            <div class="message-main-item">
+  
+              <div *ngIf="message?.from != UserLoggedId" class="masterMessage clearfix">
+                <div class="first-way">
+                  <h6>{{message?.message}}</h6>
+                </div>
+                <span class="reg-font d-block mt5">{{message?.createdAt | date:'medium'}}</span>
+              </div>
+  
+              <div *ngIf="message.from == UserLoggedId" class="messageReply clearfix">
+                <div class="second-way">
+                  <h6> <h6>{{message?.message}}</h6></h6>
+                </div>
+                <span class="reg-font d-block mt5">{{message?.createdAt | date:'medium'}}</span>
+              </div>
+  
+  
+  
+            </div>
+          </div>
+          <!-- <div class="message-main-item">
+  
+            <div class="masterMessage clearfix">
+              <div class="first-way">
+                <h6>السلام عليكم يا أستاذ عبدالمحسن يارب تكون بخير</h6>
+              </div>
+              <span class="reg-font d-block mt5">12/4/2021, 12:45 PM</span>
+            </div>
+  
+            <div class="messageReply clearfix">
+              <div class="second-way">
+                <h6>وعليكم السلام ورحمة الله</h6>
+              </div>
+              <span class="reg-font d-block mt5">12/4/2021, 12:45 PM</span>
+            </div>
+  
+          </div>
+  
+  
+          <div class="message-main-item">
+  
+            <div class="masterMessage clearfix">
+              <div class="first-way">
+                <h6>هنالك العديد من الأنواع المتوفرة لنصوص لوريم إيبسوم، ولكن الغالبية تم تعديلها بشكل ما عبر إدخال بعض
+                  النوادر أو الكلمات العشوائية إلى النص. إن كنت تريد أن تستخدم نص لوريم إيبسوم</h6>
+              </div>
+              <span class="reg-font d-block mt5">12/4/2021, 12:45 PM</span>
+            </div>
+  
+            <div class="messageReply clearfix">
+              <div class="second-way">
+                <h6>شكرا لكم علي جهودكم معانا وبالتوفيق دائما</h6>
+              </div>
+              <span class="reg-font d-block mt5">12/4/2021, 12:45 PM</span>
+            </div>
+  
+          </div> -->
+  
+  
+  
+          <!-- 
+          <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="sendMessageSpecificUserForm"
+          (ngSubmit)="sendMeaage()">
+          <textarea formControlName="message" style="margin-bottom: 15px;" class="form-control"
+            placeholder="اكتب رسالتك هنا"></textarea>
+          <div class="d-flex">
+            <button style="margin-left: 10px;" type="submit"
+              class="btn btn-success float-right auto-width-btn admin-btn">
+              اضف رسالة
+            </button>
+  
+  
+          </div>
+  
+        </form> -->
+  
+          <div class="search-group reply-button-container">
+            <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="sendMessageSpecificUserForm"
+              (ngSubmit)="sendMeaage()">
+              <button [disabled]="!sendMessageSpecificUserForm.valid" type="submit" class="search-ic">
+                <fa-icon class="" [icon]="faPaperPlane"></fa-icon>
+              </button>
+  
+              <textarea formControlName="message" placeholder="اكتب رسالتك هنا" class="form-control"
+                style="margin-bottom: 10px;padding-right: 40px;"></textarea>
+            </form>
+          </div>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </div>
+  

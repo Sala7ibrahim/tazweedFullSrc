@@ -1,0 +1,84 @@
+
+<!-- <app-admin-header></app-admin-header>  -->
+<div class="container">
+  <div class="project-item mt30">
+    <div class="card-body">
+      <img class="userProfileImage"  src="../../assets/images/profile/avatar.png" />
+      <h1 class="project-title mb0">{{userobj?.firstName}} {{userobj?.lastName}}</h1>
+      <span *ngIf="userobj?.customerType=='partner'" class="acc-type">كاتب</span>
+      <span *ngIf="userobj?.customerType=='client'" class="acc-type">عميل</span>
+      <ngb-rating max="5" [readonly]="true" [rate]="userobj?.ratingAverage"></ngb-rating>
+      <h4>{{userobj?.email}}</h4>
+      <h6>
+        <fa-icon class="ml5 coloredIcon" [icon]="faFolderOpen"></fa-icon> عدد المشاريع المكتملة <span
+          class="jobCount green">{{userobj?.numOfCompletedJobs}}</span>
+      </h6>
+      <h6>
+        <fa-icon class="ml5 coloredIcon" [icon]="faFolderOpen"></fa-icon> عدد المشاريع المرفوضة <span
+          class="jobCount red">{{userobj?.numOfRejectedJobs}}</span>
+      </h6>
+      <div *ngIf="userobj?.customerType=='partner'" class="data-box">
+        <h6>نبذة عن الكتابات</h6>
+        <quill-editor readOnly="true"   [(ngModel)]="userobj.writingAbility" [styles]="{height: '200px'}"></quill-editor>
+
+      </div>
+      <div *ngIf="userobj?.customerType=='partner'" class="data-box">
+        <h6>نبذة عن المهارات البحثية</h6>
+        <quill-editor readOnly="true"   [(ngModel)]="userobj.searchingAbility" [styles]="{height: '200px'}"></quill-editor>
+
+      </div>
+
+      
+
+      <div class="data-box">
+        <h5 *ngIf="userobj?.customerType=='partner'">نبذة عن الكاتب </h5>
+        <h5 *ngIf="userobj?.customerType=='client'">نبذة عن العميل </h5>
+        <p>{{userobj?.briefOfWriter}}</p>
+      </div>
+      <div class="data-box">
+        <h5>مجالات الاهتمام </h5>
+        <ul class="tags d-flex">
+          <li class="tag-item" *ngFor="let tag of userobj?.fieldsOfInterest">{{tag}}</li>
+        </ul>
+      </div>
+
+
+
+
+
+    </div>
+  </div>
+  <!-- <button routerLink="/dashboard" type="button"
+  class="btn btn-success   auto-width-btn admin-btn">
+  <fa-icon class="ml5" [icon]="faThList"></fa-icon>
+  العودة للوحة التحكم
+</button> -->
+  <!-- <div class="d-flex d-flex justify-content-center">
+    <div style="margin:5px" *ngIf="userobj.status=='active'">
+      <span class="dots green"></span> مفعل
+    </div>
+    <div style="margin:5px" *ngIf="userobj.status=='pending'">
+      <span class="dots red"></span>معطل
+    </div>
+
+    <button (click)="activateAccount(userobj?._id)" style="margin-left: 10px;"
+      *ngIf="selectedUser.status=='pending'" type="button" class="btn btn-success  auto-width-btn admin-btn">
+      <fa-icon class="ml5" [icon]="faCheck"></fa-icon>
+      تفعيل الحساب
+    </button>
+    <button (click)="deActivateAccount(userobj?._id)" style="margin-left: 10px;"
+      *ngIf="userobj?.status=='active'" type="button"
+      class="btn btn-success admin-danger-btn  auto-width-btn admin-btn">
+      <fa-icon class="ml5" [icon]="faTimes"></fa-icon>
+      تعطيل الحساب
+    </button>
+    <button routerLink="/dashboard" type="button"
+      class="btn btn-success   auto-width-btn admin-btn">
+      <fa-icon class="ml5" [icon]="faThList"></fa-icon>
+      العودة للوحة التحكم
+    </button>
+
+    
+  </div> -->
+
+</div>

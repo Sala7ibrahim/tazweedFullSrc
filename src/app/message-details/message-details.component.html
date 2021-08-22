@@ -1,0 +1,26 @@
+<app-after-login-header></app-after-login-header>
+<div class="container">
+
+  <div class="card project-item" style="margin-top: 30px;">
+    <div class="card-body">
+      <div class="clearfix">
+        <div class="project-small-image float-right">
+          <img src="../../assets/images/profile/avatar.png" />
+        </div>
+        <div class="owner-data float-right">
+            <h5>{{selectedMessage.fromName}}</h5>
+            <!-- <span class="gray reg-font font-13">منذ 5 ساعات</span> -->
+            <span class="gray reg-font font-13">{{selectedMessage.createdAt |date : "dd.MM.y h:mm a" }}</span>
+  
+          </div>
+
+      </div>
+      <h5 class="message-title reg-font">{{selectedMessage.message}}</h5>
+    </div>
+  </div>
+</div>
+<!-- <h1>selected message</h1>
+<pre>
+    {{selectedMessage|json}}
+</pre> -->
+<app-footer-inner></app-footer-inner>

@@ -1,0 +1,120 @@
+ 
+ <div class="main-content p30">
+
+
+   <div class="mb30">
+    <!-- <h1>{{messageObject | json}}</h1> -->
+    <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="sendMessageForCategoryForm"
+      (ngSubmit)="sendMeaageForCategory()">
+
+      <div class="form-group">
+        <h6>اختر المجموعة التى تود مراسلتها</h6>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input class="custom-control-input" id="partner" type="radio" value="partner" formControlName="for">
+          <label class="custom-control-label" for="partner">الكتاب</label>
+        </div>
+
+        <div class="custom-control custom-radio custom-control-inline">
+          <input class="custom-control-input" id="client" type="radio" value="client" formControlName="for">
+          <label class="custom-control-label" for="client">العملاء</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline">
+          <input class="custom-control-input" id="all" type="radio" value="*" formControlName="for">
+          <label class="custom-control-label" for="all">الكل</label>
+        </div>
+
+
+      </div>
+      <textarea formControlName="message" style="margin-bottom: 15px;" class="form-control"
+        placeholder="اكتب رسالتك هنا"></textarea>
+      <div class="d-flex">
+        <button style="margin-left: 10px;" type="submit"
+          class="btn btn-success float-right auto-width-btn admin-btn">
+          اضف رسالة
+        </button>
+
+        <button (click)="closeMessageDialog()" type="button"
+          class="btn btn-success no-bg-btn float-right auto-width-btn admin-btn">
+          إلغاء
+        </button>
+
+      </div>
+      <p *ngIf="showsendAllSuccess">تم ارسال الرسالة بنجاح</p>
+      <p *ngIf="showsendAllFail">حدث خطأ اثناء الارسال</p>
+    </form>
+  </div>
+  <div class="message-container">
+    <div class="profiles-data admin-table-container">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">المستلم</th>
+            <th scope="col">الرسالة</th>
+            <th scope="col">تاريخ الرسالة</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let message of messageObject">
+            <td *ngIf="message?.firstName ==null && message?.lastName ==null">اسم مستلم تجريبى</td>
+            <td *ngIf="message?.firstName !=null && message?.lastName !=null">{{message?.firstName}}
+              {{message?.lastName}}</td>
+            <td>{{message?.message}}</td>
+            <td>{{message?.createAt | date : "dd.MM.y h:mm a" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <h1>{{unpaidbalance|json}}</h1> -->
+    </div>
+  </div>
+ 
+ <!-- message dialog -->
+ <div *ngIf="showMessageDialog" class="modal2 custom-modal custom-modal22 admin-dlg message-dlg" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h6 class="modal-title">
+            <fa-icon class="ml5" [icon]="faEnvelope2"></fa-icon>الرسائل
+          </h6>
+          <button (click)="closeMessageDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body text-right">
+          <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="sendMessageSpecificUserForm"
+            (ngSubmit)="sendMeaage()">
+            <!-- <h6>{{messageReceiver._id}}</h6> -->
+            <textarea formControlName="message" style="margin-bottom: 15px;" class="form-control"
+              placeholder="اكتب رسالتك هنا"></textarea>
+            <div class="d-flex">
+              <button style="margin-left: 10px;" type="submit"
+                class="btn btn-success float-right auto-width-btn admin-btn">
+                اضف رسالة
+              </button>
+
+              <button (click)="closeMessageDialog()" type="button"
+                class="btn btn-success no-bg-btn float-right auto-width-btn admin-btn">
+                إلغاء
+              </button>
+
+            </div>
+            <p *ngIf="showsendSuccess">تم ارسال الرسالة بنجاح</p>
+            <p *ngIf="showsendFail">حدث خطأ اثناء الارسال</p>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<div *ngIf="showLoader" class="loader loaderMaster">
+    <div class="cssload-container">
+      <div class="cssload-speeding-wheel"></div>
+    </div>
+  </div>
+  
+</div>

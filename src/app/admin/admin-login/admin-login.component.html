@@ -1,0 +1,62 @@
+<header class="fixed-header">
+    <div class="container text-center">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" routerLink=""><img src="../../../assets/images/logo.png" /></a>
+      </nav>
+    </div>
+  </header>
+  
+<div class="main-content mhVP">
+  <div class="container">
+  <div class="form-title mt0"> 
+    <h1>أدمن / صاحب الموقع </h1>
+  </div>
+
+      
+      <div class="row">
+        <form (keydown.enter)="$event.preventDefault()" class="col-lg-6 col-md-6 col-sm-12 col-12 mt20" [formGroup]="loginForm" (ngSubmit)="login('admin')">
+          <div class="form-group">
+            <input type="text" name="email" class="form-control" formControlName="email" placeholder="البريد الالكترونى" />
+            <span *ngIf="!loginForm.get('email').valid && loginForm.get('email').touched">من فضلك قم بادخال البريد
+              الالكترونى</span>
+          </div>
+          <div class="form-group relative">
+            <input id="password1" type="password" name="password" class="form-control" formControlName="password"
+              placeholder="كلمة المرور">
+            <span class="showHidePassword" *ngIf="showPasswordIcon" (click)="showPassword('password1')">
+              <fa-icon [icon]="faEye"></fa-icon>
+            </span>
+            <span class="showHidePassword" *ngIf="hidePasswordIcon" (click)="hidePassword('password1')">
+              <fa-icon [icon]="faEyeSlash"></fa-icon>
+            </span>
+            <span class="help-block" *ngIf="!loginForm.get('password').valid && loginForm.get('password').touched">password
+              must be at least 8 characters long</span>
+          </div>
+    
+          <div class="clearfix">
+            <button  class="btn btn-success login-btn-last float-right" type="submit">تسجيل الدخول</button>
+          </div>
+    
+          <div *ngIf="showLoader" class="loader">
+            <div class="cssload-container">
+              <div class="cssload-speeding-wheel"></div>
+              </div>
+          </div>
+          
+        </form>
+    
+      </div>
+    
+
+   
+    
+    
+  <div *ngIf="showFailed" class="text-center fails stickyMessage ">
+    <fa-icon [icon]="faExclamationTriangle"></fa-icon>
+    <h1>تعذر تسجيل الدخول </h1>
+    <h2>{{failedLogin.error.message}}</h2>
+  </div>
+</div>
+</div>
+
+

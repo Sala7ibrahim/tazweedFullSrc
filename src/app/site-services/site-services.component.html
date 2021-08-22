@@ -1,0 +1,92 @@
+<app-header></app-header>
+<div class="main-content">
+  <div class="container">
+  <div class="page-wrapper">
+    <div class="main-intro">
+      <h1 class="text-center">خدمات المحتوى</h1>
+      <p class="main-breif">صممنا تزويد ليكون التسويق بالمحتوى لعبتك</p>
+    </div>
+
+
+    <!-- <div class="radio-item-c" *ngFor="let projectConfig of projectConfig">
+      <input  [id]="projectConfig.id" type="radio" [value]="projectConfig.id">
+
+      <label [for]="projectConfig.id">
+        <span *ngIf="projectConfig.id==1">قصير</span>
+        <span *ngIf="projectConfig.id==2">متوسط</span>
+        <span *ngIf="projectConfig.id==3">طويل</span>
+
+        <br>
+        {{projectConfig.size}} كلمة
+      </label>
+    </div> -->
+
+    <div class="service-row">
+      <h1 class="text-center master-title">كتابة مقالات</h1>
+      <div class="services-block row">
+        <div *ngFor="let projectConfig of projectConfig" class="col-lg-4  col-12 service-child">
+          <div class="service-item">
+            
+            <h6 *ngIf="projectConfig.id==1" class="package-title">مقال قصير</h6>
+            <h6 *ngIf="projectConfig.id==2" class="package-title">مقال متوسط</h6>
+            <h6 *ngIf="projectConfig.id==3" class="package-title">مقال طويل</h6>
+            <hr>
+            <h5 class="package-count">{{projectConfig.size}} كلمة</h5>
+            <hr>
+            <span class="start-with">يبدأ من</span>
+            <h5 class="package-count">{{projectConfig.amount}} ر.س</h5>
+            <button routerLink="/clientRegister" type="button" class="btn btn-success serv-btn">
+              <fa-icon style="padding-left: 5px;" [icon]="faPlus"></fa-icon>
+
+
+              أطلب الخدمة
+            </button>
+          </div>
+        </div>
+
+        <!-- <div class="col-4">
+            <div class="service-item">
+              <h6 class="package-title">مقال قصير</h6>
+              <hr>
+              <h5 class="package-count">600 كلمة</h5>
+              <hr>
+              <span class="start-with">يبدأ من</span>
+              <h5 class="package-count">90 ر.س</h5>
+              <button type="button" class="btn btn-success serv-btn">
+                <fa-icon style="padding-left: 5px;" [icon]="faPlus"></fa-icon>
+  
+  
+                أطلب الخدمة
+              </button>
+            </div>
+          </div>
+          <div class="col-4">
+            <div class="service-item">
+              <h6 class="package-title">مقال قصير</h6>
+              <hr>
+              <h5 class="package-count">600 كلمة</h5>
+              <hr>
+              <span class="start-with">يبدأ من</span>
+              <h5 class="package-count">90 ر.س</h5>
+              <button type="button" class="btn btn-success serv-btn">
+                <fa-icon style="padding-left: 5px;" [icon]="faPlus"></fa-icon>
+  
+  
+                أطلب الخدمة
+              </button>
+            </div>
+          </div> -->
+
+      </div>
+    </div>
+
+    <p class="services-footer">قريبا.. خدمات أكثر لنمو أكبر</p>
+
+  </div>
+
+
+
+</div>
+</div>
+
+<app-footer></app-footer>

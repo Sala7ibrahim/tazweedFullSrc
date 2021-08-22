@@ -1,0 +1,500 @@
+<app-after-login-header></app-after-login-header>
+<div class="container">
+
+  <div *ngIf="showAddForm" class="add-project-container col-lg-9 col-md-9 col-12">
+    <progressbar [value]="progressValue"></progressbar>
+    <form (keydown.enter)="$event.preventDefault()" [(formGroup)]="addProjectForm" (ngSubmit)="addProject()">
+
+      <!-- step 0 
+       <div class="step-1" [ngClass]="stepValue == 0 ? 'd-block' : 'd-none'">
+        <div class="form-title">
+          <h1>أضاف مشروع جديد</h1>
+
+
+          <div class="anotherRegisteration">
+            <span class="ask reg-font ">أختار نوع المشروع الذى تريد اضافته على تزويد</span>
+          </div>
+        </div>
+       
+        <div class="form-group">
+          <h6 class="mb15">حدد نوع المشروع</h6>
+          <div class="projectTypeContainer d-flex justify-content-between mb50">
+            <div (click)="selectArticles()" [ngClass]="activeArticles?'active':''" class="typeItem">
+              <fa-icon [icon]="faFileAlt"></fa-icon>
+              مقالات
+            </div>
+            <div [ngClass]="activeProducts?'active':''" (click)="selectProducts()" class="typeItem">
+              <fa-icon [icon]="faCube"></fa-icon>
+              وصف منتج
+            </div>
+            <div [ngClass]="activeTweets?'active':''" (click)="selectTweets()" class="typeItem">
+              <fa-icon [icon]="faTwitter"></fa-icon>
+              كتابة تغريدات
+            </div>
+          </div>
+       
+        </div>
+      
+        <div class="form-group justify-content-end d-flex">
+          <button
+          
+            (click)="stepValue = 1;progressValue=40" type="button"
+            class="btn btn-success next generalBtnStyle add-roject-btn">التالي
+            <span>
+              <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </span></button>
+            
+        </div>
+      </div>
+-->
+
+
+      <!-- step 1-1 -->
+      <div class="step-1" [ngClass]="stepValue == 1 ? 'd-block' : 'd-none'">
+
+
+
+
+
+
+
+        <div class="form-title">
+          <h1>المعلومات الأساسية</h1>
+
+
+          <div class="anotherRegisteration">
+            <span class="ask reg-font">تساعدنا هذه المعلومات في اختيار الكاتب المناسب لمشروعك</span>
+          </div>
+          <!-- <progressbar [value]="progressValue"></progressbar> -->
+        </div>
+        <div class="form-group">
+          <h6>العنوان المقترح للمقال</h6>
+          <input (keyup)="logValue($event,'projectTitle')" type="text" name="projectTitle" class="form-control"
+            formControlName="projectTitle" placeholder="(اكتب اقتراحك هنا وسيعمل الكاتب على تحسينه)" />
+          <span *ngIf="!addProjectForm.get('projectTitle').valid && addProjectForm.get('projectTitle').touched">ادخل
+            العنوان المقترح للمقال</span>
+        </div>
+        <div class="form-group">
+          <h6>في أي مجال تحب نكتب لك؟</h6>
+          <input (keyup)="logValue($event,'projectField')" type="text" name="projectField" class="form-control"
+            formControlName="projectField" placeholder="(اختر أقرب المجالات لمشروعك) " />
+          <span *ngIf="!addProjectForm.get('projectField').valid && addProjectForm.get('projectField').touched">اختر
+            المجال</span>
+        </div>
+        <div class="form-group">
+          <h6>لديك أفكار تحب التركيز عليها؟ <span class="reg-font-2 addon">(اختياري)</span></h6>
+          <textarea id="textEditor" (keyup)="logValue($event,'projectIdea')" type="text" name="projectIdea"
+            class="form-control" formControlName="projectIdea"
+            placeholder="(يمكنك استغلال هذه الفرصة للترويج لخدماتك التي تحل مشاكل العملاء)"></textarea>
+        </div>
+        <div class="form-group justify-content-end d-flex">
+          <!-- <button (click)="stepValue = 0;progressValue=20" type="button"
+            class="btn btn-success generalBtnStyle prev-btn-custom prev add-roject-btn">الرجوع
+            <span>
+              <fa-icon [icon]="faChevronRight"></fa-icon>
+            </span>
+          </button> -->
+          <button
+            [disabled]="!addProjectForm.get('projectTitle').valid || !addProjectForm.get('projectField').valid || !addProjectForm.get('projectIdea').valid "
+            (click)="stepValue = 2;progressValue=50" type="button"
+            class="btn btn-success next generalBtnStyle add-roject-btn">التالي
+            <span>
+              <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </span></button>
+
+        </div>
+      </div>
+      <!-- step 2 -->
+
+      <div class="step-2" [ngClass]="stepValue == 2 ? 'd-block' : 'd-none'">
+        <h1 class="form-title">الآن نستهدف جمهورك</h1>
+        <div class="form-group tags-cloud">
+          <h6>كلمات مفتاحية تريد استهدافها في محركات البحث</h6>
+          <mat-form-field class="form-control">
+            <mat-chip-list #chipList aria-label="Fruit selection">
+              <!-- [pattern] ="textPattern" -->
+              <mat-chip *ngFor="let tag of tagsList" [selectable]="selectable" [removable]="removable"
+                (removed)="remove(tag)">
+                {{tag.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="
+              اضغط enter بعد كل كلمة مفتاحية
+              
+              " [matChipInputFor]="chipList" [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
+
+
+
+        </div>
+
+        <div class="form-group">
+          <h6>لديك مصادر تريد أن يستفيد منها الكاتب؟<span class="ask reg-font">(اختياري)</span></h6>
+          <textarea (keyup)="logValue($event,'resource')" class="form-control"
+            placeholder="(مثلا، الملف التعريفي للشركة، تقرير حول مجال عملك)" formControlName="resource"></textarea>
+
+        </div>
+        <div class="form-group tags-cloud">
+          <h6>لديك روابط تريد إدراجها في المقال؟<span class="ask reg-font">(اختياري)</span></h6>
+          <mat-form-field class="form-control">
+            <mat-chip-list #chipList2>
+              <mat-chip *ngFor="let externalLink of externalLinks" [selectable]="selectable" [removable]="removable"
+                (removed)="removeLink(externalLink)">
+                {{externalLink.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
+              <input placeholder="
+              اضغط enter بعد كل رابط
+              
+              " [matChipInputFor]="chipList2" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="addLinks($event)">
+            </mat-chip-list>
+          </mat-form-field>
+
+        </div>
+
+
+        <div class="form-group justify-content-between d-flex">
+          <button (click)="stepValue = 1;progressValue=25" type="button"
+            class="btn btn-success generalBtnStyle prev-btn-custom prev add-roject-btn">الرجوع
+            <span>
+              <fa-icon [icon]="faChevronRight"></fa-icon>
+            </span>
+          </button>
+          <button [disabled]="!addProjectForm.get('resource').valid" (click)="stepValue = 3;progressValue=75"
+            type="button" class="btn btn-success generalBtnStyle next add-roject-btn">التالي
+            <span>
+              <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </span>
+          </button>
+
+        </div>
+
+
+      </div>
+
+      <!-- step 3 -->
+
+      <div class="step-3" [ngClass]="stepValue == 3 ? 'd-block' : 'd-none'">
+        <h1 class="form-title mb20">حدد حجم استثمارك</h1>
+        <div class="form-group mb20">
+          <h6>اختر حجم المشروع </h6>
+          <div class="d-flex">
+            <div class="radio-item-c" *ngFor="let projectConfig of projectConfig">
+              <input (change)="calculateCost()" [id]="projectConfig.id" type="radio" [value]="projectConfig.id"
+                formControlName="size">
+              <!-- <label for="projectConfig.id">{{projectConfig.name}} <br>{{projectConfig.size}} كلمة</label> -->
+
+              <label [for]="projectConfig.id">
+                <span *ngIf="projectConfig.id==1">قصير</span>
+                <span *ngIf="projectConfig.id==2">متوسط</span>
+                <span *ngIf="projectConfig.id==3">طويل</span>
+
+                <br>
+                {{projectConfig.size}} كلمة
+              </label>
+            </div>
+          </div>
+
+
+
+        </div>
+
+        <div class="form-group mb20">
+          <h6>حدد مدة التنفيذ</h6>
+          <div class="d-flex">
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="shortTime" type="radio" value="1" name="timePerDay"
+                formControlName="timePerDay">
+              <label for="shortTime">24 ساعة </label>
+            </div>
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="mediumTime" type="radio" value="2" name="timePerDay"
+                formControlName="timePerDay">
+              <label for="mediumTime">48 ساعة</label>
+            </div>
+            <div class="radio-item-c">
+              <input (change)="calculateCost()" id="largeTime" type="radio" value="3" name="timePerDay"
+                formControlName="timePerDay">
+              <label for="largeTime">72 ساعة</label>
+            </div>
+          </div>
+        </div>
+        <div class="total-container">
+
+
+
+          <div class="form-group">
+            <h6>السعر الأولي</h6>
+            <h5>{{projectCost}} ر.س</h5>
+          </div>
+          <!-- *ngIf="showAdditionnalValueMessage" -->
+          <div *ngIf="showAdditionnalValueMessage" class="modal2 custom-modal custom-modal22 addition-box"
+            role="dialog">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">القيمة الاضافيه</h5>
+                  <button (click)="closeDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-right">
+                  <h6 class="reg-font">تم اضافة قيمة اضافية</h6>
+                  <h6 class="reg-font">{{addProjectForm.get('addtionalAmount').value}} ر.س</h6>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>من فضلك ضع قيمة إضافية تراها مناسبة </p>
+          <div class="form-group additon">
+
+            <button [disabled]="!addProjectForm.get('size').valid || !addProjectForm.get('timePerDay').valid "
+              type="button" class="btn very-normal-btn" (click)="addAddition()">أضف</button>
+            <input type="number" class="form-control" formControlName="addtionalAmount" #additoin
+              placeholder="(أجر إضافي (اختياري" />
+            <span class="hint">زيادة القيمة تجذب أفضل الكتاب وتمنحك الأولوية</span>
+          </div>
+
+          <div class="form-group">
+            <span>الإجمالي (التكلفة + الأجر الإضافي) = </span><span class="total-num">{{finalCost}} ر.س</span>
+          </div>
+
+        </div>
+        <div class="form-group justify-content-between d-flex">
+          <button (click)="stepValue = 2;progressValue=75" type="button"
+            class="btn btn-success generalBtnStyle prev-btn-custom prev add-roject-btn">الرجوع
+            <span>
+              <fa-icon [icon]="faChevronRight"></fa-icon>
+            </span>
+          </button>
+          <button [disabled]="!addProjectForm.get('size').valid || !addProjectForm.get('timePerDay').valid "
+            (click)="stepValue = 4;progressValue=100" type="button"
+            class="btn btn-success generalBtnStyle next add-roject-btn">التالي
+            <span>
+              <fa-icon [icon]="faChevronLeft"></fa-icon>
+            </span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <!-- step 4 -->
+
+      <div class="step-4" [ngClass]="stepValue == 4 ? 'd-block' : 'd-none'">
+
+
+        <p>هل لديك كوبون خصم؟ </p>
+        <div class="form-group additon" style="position: relative;">
+
+          <button type="button" class="btn very-normal-btn" (click)="checkCuponNameValidity()">استعلام</button>
+          <button type="button" *ngIf="showRemovePromoBtn" class="btn very-normal-btn cancel"
+            (click)="removePromoCodefromJop()">إلغاء</button>
+          <button type="button" *ngIf="ValiditySuccess" class="btn very-normal-btn"
+            (click)="addPromoCodeToJop()">تفعيل</button>
+          <input type="text" (input)="hideallStatus()" class="form-control" formControlName="promoCode"
+            placeholder="ادخل الكوبون الخاص بك" />
+          <div class="validityContainer projectValidity">
+            <div *ngIf="showLoaderInput" id="circularG">
+              <div id="circularG_1" class="circularG"></div>
+              <div id="circularG_2" class="circularG"></div>
+              <div id="circularG_3" class="circularG"></div>
+              <div id="circularG_4" class="circularG"></div>
+              <div id="circularG_5" class="circularG"></div>
+              <div id="circularG_6" class="circularG"></div>
+              <div id="circularG_7" class="circularG"></div>
+              <div id="circularG_8" class="circularG"></div>
+            </div>
+            <fa-icon *ngIf="ValiditySuccess" class="checkValidity" [icon]="faCheckCircle"></fa-icon>
+            <fa-icon *ngIf="ValidityFail" class="checkValidity error" [icon]="faTimesCircle"></fa-icon>
+
+          </div>
+        </div>
+        <div class="form-group">
+
+          <h1 class="form-title mb5">فاتورة المشروع</h1>
+          <h6 class=" gray reg-font">بعد هذه الخطوة سيكون مشروعك بين أيدي كتاب تزويد وستصلك عروضهم
+          </h6>
+        </div>
+        <div class="total-container">
+
+
+          <div class="form-group d-flex justify-content-between">
+            <span>تكلفة المشروع</span>
+            <span class="colored">{{projectCost}} ر.س</span>
+          </div>
+          <div class="form-group d-flex justify-content-between">
+            <span>الأجر الإضافي</span>
+            <span class="colored">{{addProjectForm.get("addtionalAmount").value}} ر.س</span>
+          </div>
+          <hr>
+          <div *ngIf="!promocodeadded" class="form-group d-flex justify-content-between">
+            <span>الإجمالي (التكلفة + الأجر الإضافي)</span>
+            <span class="colored">{{finalCost}} ر.س</span>
+          </div>
+
+          <div *ngIf="promocodeadded" class="form-group d-flex justify-content-between">
+
+            <span>الإجمالي (التكلفة + الأجر الإضافي)</span>
+            <span class="colored"><s>{{finalCost}} ر.س</s></span>
+
+          </div>
+
+          <div *ngIf="promocodeadded" class="form-group d-flex justify-content-between">
+            <span>الإجمالي بعد اضافة البروموكود</span>
+            <span class="colored">{{finalCostFterPromo}} ر.س</span>
+          </div>
+
+
+        </div>
+        <!-- <div class="payment-container">
+          <h4>أدخل بيانات بطاقتك الائتمانية</h4>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="أسم صاحب البطاقة" />
+                </div>
+              </div>
+              <div class="col-lg-12 col-md-12 col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="رقم بطاقة الائتمان (XXXXXXXXXXXXXXXX)" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="الشهر / السنة" />
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="الرقم السري (CVV)" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+
+
+        <div class="form-group justify-content-between d-flex">
+          <button (click)="stepValue = 3" type="button"
+            class="btn btn-success generalBtnStyle prev-btn-custom prev add-roject-btn">الرجوع
+            <span>
+              <fa-icon [icon]="faChevronRight"></fa-icon>
+            </span>
+          </button>
+          <div class="form-group d-flex">
+            <button (click)="addProjectToCart()" type="button" class="btn btn-success nobg-btn auto-width-btn">
+              <span style="padding-left: 5px;">+</span>
+              أضف للسلة
+            </button>
+            <button type="submit" class="btn btn-success generalBtnStyle add-project-submit mr20">ادفع الآن
+            </button>
+
+          </div>
+
+
+
+        </div>
+
+      </div>
+
+
+
+    </form>
+    <!-- <div class="text-center showFailMessage" *ngIf="showFailMessage">
+  
+      <p>{{errorDetails}}</p>
+    </div>
+    <div class="text-center showSuccessMessage" *ngIf="showSuccessMessage">
+  
+      <p>تم التسجيل بنجاح برجاء فتح بريدك الالكترونى لتأكيد التسجيل</p>
+    </div> -->
+    <!-- <div *ngIf="showSuccessMessage" class="text-center success-project">
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+      <h1>طلبك وصل!</h1>
+      <p>شكرا لاستخدامك منصة تزويد.. الآن نختار لك الكاتب المميز</p>
+      <button type="button" class="btn btn-success generalBtnStyle add-project-submit">أنتقل إلى صفحة المشاريع </button>
+    </div> -->
+
+  </div>
+  <!-- *ngIf="showAddToCartMessage" -->
+  <div *ngIf="showAddToCartMessage" class="text-center success-project">
+    <fa-icon [icon]="faCheckCircle"></fa-icon>
+    <h1>طلبك الآن في السلة!</h1>
+    <p>بإمكانك طلب المزيد من المحتوى أو التوجه إلى السلة لإتمام الدفع
+    </p>
+
+
+
+    <div class="form-group  d-flex justify-content-center">
+      <button routerLink="/cart" type="button" class="btn btn-success nobg-btn auto-width-btn">
+        انتقال للسلة
+
+      </button>
+        <button (click)="newProjectAdd()" type="button" class="btn btn-success generalBtnStyle add-project-submit mr20">
+          <span style="padding-left: 5px;">+</span>
+          طلب مشروع جديد
+        </button>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="showSuccessMessage" class="text-center success-project">
+    <fa-icon [icon]="faCheckCircle"></fa-icon>
+    <h1>طلبك وصل!</h1>
+    <p>سوف يتم تحويلك تلقائيا الى صفحة الدفع واتمام اضافة المشروع</p>
+    <!-- <button routerLink="/myProjects" type="button" class="btn btn-success generalBtnStyle add-project-submit">أنتقل إلى صفحة المشاريع </button> -->
+    <!-- <a target="_blank" class="btn btn-success generalBtnStyle add-project-submit" [href]="paymentUrl">أنتقل إلى صفحة الدفع لاتمام اضافة مشروعك</a> -->
+  </div>
+
+  <!-- <div *ngIf="showAddSuccessIframeContainer" class="iframe-container">
+    <div *ngIf="showLoaderIframe" class="loader">
+      <div class="cssload-container">
+        <div class="cssload-speeding-wheel"></div>
+        </div>
+    </div>
+    <div *ngIf="showSuccessMessage"  class="text-center success-project"> 
+      <fa-icon [icon]="faCheckCircle"></fa-icon>
+      <h1>طلبك وصل!</h1>
+      <p>سوف يتم تحويلك تلقائيا الى صفحة الدفع واتمام اضافة المشروع</p>
+    </div>
+    <a (click)="closeIframe()" class="close-iframe"><fa-icon [icon]='faTimes'></fa-icon></a>
+    <iframe *ngIf="showIframe"  width="100%" height="800" src="/payment">
+      
+    </iframe>
+  </div> -->
+
+
+</div>
+
+
+
+<div *ngIf="showAddJobLssThanLimit" class="modal2 custom-modal" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">اضافة مشروع</h5>
+        <button (click)="closeaddLimitDialog()" type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>عذرا.. الحد الأدنى للمشروع ٥ ريالات</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<app-footer-inner></app-footer-inner>
+<div *ngIf="showLoader" class="loader loaderMaster">
+  <div class="cssload-container">
+    <div class="cssload-speeding-wheel"></div>
+  </div>
+</div>
